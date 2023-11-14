@@ -102,4 +102,4 @@ sources:
           - name: tracking_id
           - name: status
           - name: _fivetran_deleted
-          - name: _fivetran_synced 
+          - name: _fivetran_synced
