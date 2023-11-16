@@ -1,11 +1,11 @@
 WITH stg_users1 AS (
     SELECT *
-    FROM {{ ref('stg_users') }}
+    FROM {{ ref('stg_sql_server_dbo_users') }}
     ),
 
     stg_addresses1 AS (
     SELECT *
-    FROM {{ ref('stg_addresses') }}
+    FROM {{ ref('stg_sql_server_dbo_addresses') }}
     ),
 
 renamed_casted AS (
