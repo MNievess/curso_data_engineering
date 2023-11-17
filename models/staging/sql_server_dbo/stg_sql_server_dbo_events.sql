@@ -1,3 +1,6 @@
+{% set event_types = obtener_tipo_eventos() %}
+
+
 with src_events as (
 
     select * from {{ source('sql_server_dbo', 'events') }}
