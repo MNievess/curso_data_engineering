@@ -194,7 +194,6 @@ sources:
             description: ""
           - name: updated_at
             data_type: timestamp_tz
-            
             description: ""
           - name: address_id
             data_type: varchar
