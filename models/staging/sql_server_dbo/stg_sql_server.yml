@@ -1,0 +1,33 @@
+version: 2
+
+models:
+
+    - name: promos
+      description: ""
+      columns:
+        - name: promo_id
+          data_type: varchar
+          description: ""
+          tests:
+            - not_null
+            - unique
+            - relationships:
+                to: ref('stg_sql_server_dbo_orders')
+                field: <promo_id>
+        - name: promo_name
+          data_type: varchar
+          description: ""
+        - name: discount_usd
+          data_type: number
+          description: ""
+        - name: status
+          data_type: varchar
+          description: ""
+        - name: _fivetran_deleted
+          data_type: boolean
+          description: ""
+        - name: _fivetran_synced
+          data_type: timestamp_tz
+          description: ""
+
+

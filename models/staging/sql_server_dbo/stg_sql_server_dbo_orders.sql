@@ -21,12 +21,10 @@ src_orders_casted as (
         order_total::float as order_total,
         delivered_at::timestamp_tz as delivered_at,
         tracking_id::varchar(50) as tracking_id,
-        status::varchar(50) as status,
+        status::varchar(50) as status_order,
         _fivetran_deleted::boolean as _fivetran_deleted,
         _fivetran_synced::timestamp_ntz(9) as date_load
-
     from src_orders
-
 )
 
 select * from src_orders_casted
