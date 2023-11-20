@@ -17,3 +17,4 @@ src_addresses_casted as (
 )
 
 select * from src_addresses_casted
+

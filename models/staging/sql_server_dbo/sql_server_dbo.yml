@@ -2,8 +2,6 @@ version: 2
 
 sources:
 
-
-
   - name: sql_server_dbo # name of the source 
     schema: sql_server_dbo # this is the schema our raw data lives in
     database: ALUMNO18_DEV_BRONZE_DB # this is the name of our database
@@ -19,221 +17,366 @@ sources:
       
     tables:
       - name: addresses
-        description: ""
+        description: "Tabla que contiene las direcciones de los usuarios, tanto dirección de vivienda como direcciones alternativas de envío"
+
         columns:
           - name: address_id
             data_type: varchar
-            description: ""
+            description: "ID de cada dirección"
+            tests:
+              - not_null
+              - unique
+                  
           - name: zipcode
             data_type: number
-            description: ""
+            description: "Código postal de cada dirección"
+            tests:
+              - not_null
+                  
           - name: country
             data_type: varchar
-            description: ""
+            description: "País de cada dirección"
+            tests:
+              - not_null
+                  
           - name: address
             data_type: varchar
-            description: ""
+            description: "Dirección completa con calle y número"
+            tests:
+              - not_null
+                  
           - name: state
             data_type: varchar
-            description: ""
+            description: "País de la dirección"
+          
           - name: _fivetran_deleted
             data_type: boolean
             description: ""
+
           - name: _fivetran_synced
             data_type: timestamp_tz
             description: ""
 
       - name: events
-        description: >
-          Data about events in the platform of demo.
+        description: "Tabla que indica los eventos que ocurren en la web de la empresa cuando un usuario interacciona con ella"
+
         columns:
           - name: event_id
-            description: >
-              UUID of each unique event on the platform.
+            data_type: varchar
+            description: "ID de cada evento"
             tests:
-              - not_null
               - unique
-          - name: session_id
-            description: >
-              UUID of each browsing session on the platform which can contain many events.
-            tests:
               - not_null
-          - name: user_id
-            description: >
-              UUID of the user that this event is associated with.
-            tests:
-              - not_null
+                  
           - name: page_url
-            description: >
-              URL that the event happened on.
+            data_type: varchar
+            description: "URL de la página web visitada por el usuario"
             tests:
               - not_null
-          - name: created_at
-            description: >
-              Timestamp of the event (UTC).
-            tests:
-              - not_null
+                  
           - name: event_type
-            description: >
-              Type of event.
+            data_type: varchar
+            description: "Tipo de evento de interacción que realiza el usuario en la web: checkout, package_shipped, add_to_cart y page_view"
             tests:
               - not_null
-          - name: order_id
-            description: >
-              If the event is specific to an order (mostly used for checkout).
+              - accepted_values:
+                  values: ['checkout', 'package_shipped', 'add_to_cart', 'page_view']
+
+          - name: user_id
+            data_type: varchar
+            description: "ID del usuario que interactúa con la web"
+            tests:
+              - not_null
+              - relationships:
+                  field: user_id
+                  to: ref('stg_sql_server_dbo_users')
+                  
           - name: product_id
-            description: >
-              If the event is specific to a product.
-          - name: _fivetran_synced
-            description: >
-              Date that the data was loaded.
+            data_type: varchar
+            description: "ID del producto que el usuario está visitando o pidiendo"
+            tests:
+              - not_null:
+              - relationships:
+                  field: product_id
+                  to: ref('stg_sql_server_dbo_products')
+          
+          - name: session_id
+            data_type: varchar
+            description: "ID de la sesión de interacción del usuario en la web"
             tests:
               - not_null
 
-      - name: order_items
-        description: ""
-        columns:
+          - name: created_at
+            data_type: timestamp_ntz
+            description: "Fecha y hora (en segundos) de creación del evento"
+            tests:
+              - not_null
+                  
           - name: order_id
             data_type: varchar
-            description: ""
-          - name: product_id
-            data_type: varchar
-            description: ""
-          - name: quantity
-            data_type: number
-            description: ""
+            description: "ID de la orden del pedido encargado por el usuario"
+            tests:
+              - relationships:
+                  field: order_id
+                  to: ref('stg_sql_server_dbo_orders')
+
           - name: _fivetran_deleted
             data_type: boolean
             description: ""
+
+          - name: _fivetran_synced
+            data_type: timestamp_tz
+            description: ""
+
+      - name: order_items
+        description: "Tabla intermedia que relaciona cada producto con su pedido"
+
+        columns:
+          - name: order_id
+            data_type: varchar
+            description: "ID de la orden de pedido del usuario"
+            tests:
+              - unique
+              - not_null
+                  
+          - name: product_id
+            data_type: varchar
+            description: "ID del producto que el usuario ha encargado en el ORDER"
+            tests:
+              - not_null
+              - relationships:
+                  field: product_id
+                  to: ref('stg_sql_server_dbo_products')
+                
+          - name: quantity
+            data_type: number
+            description: "Cantidad de un producto determinado que el usuario ha comprado"
+            tests:
+              - not_null
+              - upper_than_zero
+
+          - name: _fivetran_deleted
+            data_type: boolean
+            description: ""
+
           - name: _fivetran_synced
             data_type: timestamp_tz
             description: ""
 
       - name: orders
-        description: ""
+        description: "Tabla que registra los datos de precios de los pedidos e información del servicio de mensajería y sus costes"
         columns:
           - name: order_id
             data_type: varchar
-            description: ""
+            description: "ID del pedido realizado por el usuario"
+            tests:
+              - unique
+              - not_null
+                  
           - name: shipping_service
             data_type: varchar
-            description: ""
+            description: "Nombre de la empresa que va a realizar la entrega del producto"
+
           - name: shipping_cost
             data_type: float
-            description: ""
+            description: "Precio de envío del paquete"
+           
           - name: address_id
             data_type: varchar
-            description: ""
+            description: "Dirección a la que se va a enviar el paquete"
+            tests:
+              - relationships:
+                  field: address_id
+                  to: ref('stg_sql_server_dbo_addresses')
+
           - name: created_at
             data_type: timestamp_tz
-            description: ""
+            description: "Fecha de creación del pedido"
+
           - name: promo_id
             data_type: varchar
-            description: ""
+            description: "ID de la promoción que se le ha aplicado a la venta"
+            tests:
+              - relationships:
+                  field: promo_id
+                  to: ref('stg_sql_server_dbo_promos')
+
           - name: estimated_delivery_at
             data_type: timestamp_tz
-            description: ""
+            description: "Fecha estimada de entrega del paquete al usuario"
+
           - name: order_cost
             data_type: float
-            description: ""
+            description: "Precio global del paquete que se ha encargado"
+
           - name: user_id
             data_type: varchar
-            description: ""
+            description: "ID del usuario que ha encargado el pedido"
+            tests:
+              - not_null 
+              - relationships:
+                  field: user_id
+                  to: ref('stg_sql_server_dbo_users')
+
           - name: order_total
             data_type: float
-            description: ""
+            description: "Precio total del paquete incluyendo el precio de los productos y el del servicio de paquetería"
+
           - name: delivered_at
             data_type: timestamp_tz
-            description: ""
+            description: "Fecha de entrega del paquete"
+
           - name: tracking_id
             data_type: varchar
             description: ""
+
           - name: status
             data_type: varchar
-            description: ""
+            description: "Estado de envío del paquete, que puede ser: delivered, preparing y shipped"
+            tests:
+              - not_null   
+              - accepted_values:
+                  values: ['delivered','preparing','shipped']
+
           - name: _fivetran_deleted
             data_type: boolean
             description: ""
+
           - name: _fivetran_synced
             data_type: timestamp_tz
             description: ""
 
       - name: products
-        description: ""
+        description: "Tabla con el registro de los productos que vende la tienda"
+
         columns:
           - name: product_id
             data_type: varchar
-            description: ""
+            description: "ID de cada producto"
+            tests:
+              - unique
+              - not_null
+                  
           - name: price
             data_type: float
-            description: ""
+            description: "Precio unitario en dólares de cada producto"
+            tests:
+              - not_null
+                  
           - name: name
             data_type: varchar
-            description: ""
+            description: "Nombre del producto"
+            tests:
+              - not_null
+                  
           - name: inventory
             data_type: number
-            description: ""
+            description: "Cantidad de cada producto en inventario"
+            tests:
+              - not_null
+                  
           - name: _fivetran_deleted
             data_type: boolean
             description: ""
+
           - name: _fivetran_synced
             data_type: timestamp_tz
             description: ""
 
       - name: promos
-        description: ""
+        description: "Tabla con las promociones que se pueden aplicar a cada venta"
+
         columns:
           - name: promo_id
             data_type: varchar
-            description: ""
+            description: "ID de la promoción, en texto"
+            tests:
+              - unique
+              - not_null
+                  
           - name: discount
             data_type: number
-            description: ""
+            description: "Descuento de cada promoción, en dólares"
+            tests:
+              - not_null
+                  
           - name: status
             data_type: varchar
-            description: ""
+            description: "Estado de la promoción activo o inactivo"
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['inactive','active']
+
           - name: _fivetran_deleted
             data_type: boolean
             description: ""
+
           - name: _fivetran_synced
             data_type: timestamp_tz
             description: ""
 
       - name: users
-        description: ""
+        description: "Tabla con el registro de cada usuario y sus datos"
         columns:
           - name: user_id
             data_type: varchar
-            description: ""
+            description: "ID de cada usuario"
+            tests:
+              - unique
+              - not_null
+                  
           - name: updated_at
-            data_type: timestamp_tz
-            description: ""
+            data_type: timestamp_tzQ
+            description: "Fecha en la que el registro de usuario y su registro de compras ha sido actualizado"
+
           - name: address_id
             data_type: varchar
-            description: ""
+            description: "ID de la dirección del usuario"
+            tests:
+              - relationships:
+                  field: address_id
+                  to: ref('stg_sql_server_dbo_addresses')
+
           - name: last_name
             data_type: varchar
+            description: "Apellido del usuario"
             tests:
-              - not_null_test
-            description: ""
+              - not_null
+
           - name: created_at
             data_type: timestamp_tz
-            description: ""
+            description: "Fecha de creación del usuario"
+            tests:
+              - not_null
+                  
           - name: phone_number
             data_type: varchar
-            description: ""
+            description: "Número de teléfono del usuario"
+            tests:
+              - not_null
+                  
           - name: total_orders
             data_type: number
-            description: ""
+            description: "Número total de pedidos que ha realizado ese usuario"
+
           - name: first_name
             data_type: varchar
-            description: ""
+            description: "Nombre del usuario"
+            tests:
+              - not_null
+                  
           - name: email
             data_type: varchar
-            description: ""
+            description: "Email de contacto del usuario"
+            tests:
+              - unique
+              - not_null
+                  
           - name: _fivetran_deleted
             data_type: boolean
             description: ""
+
           - name: _fivetran_synced
             data_type: timestamp_tz
             description: ""
