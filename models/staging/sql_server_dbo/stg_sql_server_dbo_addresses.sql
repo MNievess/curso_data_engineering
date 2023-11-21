@@ -7,6 +7,7 @@ with src_addresses as (
 src_addresses_casted as (
     select
         address_id::varchar(50) as address_id,
+        concat(address, ' ',zipcode,' ',country,' ',state) as full_address,
         zipcode::number(38,0) as zipcode,
         country::varchar(50) country,
         address::varchar(150) address,
