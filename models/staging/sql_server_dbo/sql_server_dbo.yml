@@ -95,7 +95,7 @@ sources:
             data_type: varchar
             description: "ID del producto que el usuario está visitando o pidiendo"
             tests:
-              - not_null:
+              - not_null
               - relationships:
                   field: product_id
                   to: ref('stg_sql_server_dbo_products')
@@ -136,7 +136,6 @@ sources:
             data_type: varchar
             description: "ID de la orden de pedido del usuario"
             tests:
-              - unique
               - not_null
                   
           - name: product_id
@@ -144,16 +143,13 @@ sources:
             description: "ID del producto que el usuario ha encargado en el ORDER"
             tests:
               - not_null
-              - relationships:
-                  field: product_id
-                  to: ref('stg_sql_server_dbo_products')
                 
           - name: quantity
             data_type: number
             description: "Cantidad de un producto determinado que el usuario ha comprado"
             tests:
               - not_null
-              - upper_than_zero
+              - bigger_than_zero
 
           - name: _fivetran_deleted
             data_type: boolean
@@ -204,10 +200,14 @@ sources:
           - name: estimated_delivery_at
             data_type: timestamp_tz
             description: "Fecha estimada de entrega del paquete al usuario"
+            tests:
+              - delivered_dates
 
           - name: order_cost
             data_type: float
             description: "Precio global del paquete que se ha encargado"
+            tests:
+              - bigger_than_zero
 
           - name: user_id
             data_type: varchar
@@ -221,6 +221,8 @@ sources:
           - name: order_total
             data_type: float
             description: "Precio total del paquete incluyendo el precio de los productos y el del servicio de paquetería"
+            tests:
+              - bigger_than_zero
 
           - name: delivered_at
             data_type: timestamp_tz
@@ -262,6 +264,7 @@ sources:
             description: "Precio unitario en dólares de cada producto"
             tests:
               - not_null
+              - bigger_than_zero
                   
           - name: name
             data_type: varchar

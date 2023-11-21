@@ -1,4 +1,4 @@
-{% test sum_order_total() %}
+
 
 select a.order_id, 
     a.order_cost, 
@@ -10,5 +10,5 @@ from stg_sql_server_dbo_orders a
     join stg_sql_server_dbo__promos b on a.promo_id=b.promo_id
     where total_and_discount <> a.order_total
 
-{% endtest %}
+
 

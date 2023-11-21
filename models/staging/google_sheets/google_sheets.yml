@@ -19,11 +19,41 @@ sources:
 
       - name: budget
         loaded_at_field: _fivetran_synced
+        description: "Unidades que se presupuesta que deben venderse cada mes"
         columns:
           - name: _row
+            data_type: number
+            description: "Número de registro de cada presupuesto"
+            tests:
+              - not_null
+                  
           - name: product_id
+            data_type: varchar
+            description: "ID de cada producto del que se extiende el prespuesto de ventas del mes"
+            tests:
+              - not_null
+              - relationships:
+                  field: product_id
+                  to: ref('stg_sql_server_dbo_products')
+                  
           - name: quantity
+            data_type: number
+            description: "Cantidad de cada producto que se presupuesta que debe venderse cada mes"
+            tests:
+              - not_null
+
           - name: month
+            data_type: timestamp_tz
+            description: "Mes del presupuesto"
+            tests:
+              - not_null
+                  
           - name: _fivetran_synced
+            data_type: timestamp_tz
+            description: "Fecha y hora de la ingesta de datos"
+
+
+
+
 
       

@@ -13,10 +13,10 @@ with src_promos as (
 
 stg_promos as (
     select
-        {{dbt_utils.generate_surrogate_key(["promo_id"])}} as promo_id,
-        UPPER(promo_id) as promo_name,
-        discount as discount_usd,
-        status as promo_status,
+        cast({{dbt_utils.generate_surrogate_key(["promo_id"])}} as varchar(50)) as promo_id,
+        cast(UPPER(promo_id) as varchar(50)) as promo_name,
+        discount::number(38,0) as discount_usd,
+        status::varchar(50) as promo_status,
         _fivetran_synced as date_load
     from src_promos
 )

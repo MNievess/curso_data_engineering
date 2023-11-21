@@ -12,8 +12,8 @@ WITH src_users AS (
 
 src_users_casted AS (
     SELECT
-        user_id :: varchar(50) as user_id,
-        updated_at::timestamp_ntz as updated_at,
+        user_id::varchar(50) as user_id,
+        cast(updated_at as timestamp_ntz) as updated_at,
         address_id::varchar(50) as address_id,
         last_name::varchar(50) as last_name,
         created_at::timestamp_ntz as created_at,
@@ -27,3 +27,5 @@ src_users_casted AS (
     )
 
 SELECT * FROM src_users_casted
+
+
