@@ -176,6 +176,8 @@ sources:
           - name: shipping_cost
             data_type: float
             description: "Precio de envío del paquete"
+            tests:
+              - bigger_than_zero
            
           - name: address_id
             data_type: varchar

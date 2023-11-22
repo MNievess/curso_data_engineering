@@ -36,6 +36,3 @@ src_users_casted as (
 )
 
 select * from src_users_casted
-
-
-

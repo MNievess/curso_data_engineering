@@ -21,6 +21,19 @@ src_products_casted AS (
     FROM src_products
     )
 
-SELECT * FROM src_products_casted
+--SELECT * FROM src_products_casted
 
-SELECT * from stg_sql_server_dbo_products
+SELECT
+    product_id,
+    price_usd,
+    product_name,
+    inventory
+    
+from src_products_casted
+
+union all 
+
+SELECT  {{dbt_utils.generate_surrogate_key(['9999'])}},
+        '0.0', 
+        'no_product', 
+        '0'

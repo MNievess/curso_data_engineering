@@ -14,9 +14,9 @@ with src_promos as (
 stg_promos as (
     select
         cast({{dbt_utils.generate_surrogate_key(["promo_id"])}} as varchar(50)) as promo_id,
-        cast(lower(promo_id) as varchar(50)) as promo_name,
+        cast(promo_id as varchar(50)) as promo_name,
         discount::number(38,0) as discount_usd,
-        lower(status)::varchar(50) as promo_status,
+        status::varchar(50) as promo_status,
         _fivetran_synced as date_load
     from src_promos
 )
