@@ -11,7 +11,7 @@ src_events_casted as (
 
     select
         event_id::varchar(50) as event_id,
-        page_url::varchar(50) as page_url,
+        page_url::varchar(250) as page_url,
         event_type::varchar(50) as event_type,
         user_id::varchar(50) as user_id,
         product_id::varchar(50) as product_id,
