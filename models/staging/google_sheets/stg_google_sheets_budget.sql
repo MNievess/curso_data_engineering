@@ -8,6 +8,7 @@ src_budget_casted as (
     select
         _row as _row,
         quantity::number(38,0) as quantity,
+        --year(_month)*100+month(_month) as id_anio_mes
         --to_year(month) as _month
         --datepart(month, month) as _month,
         --datepart(year, month) as _year,
