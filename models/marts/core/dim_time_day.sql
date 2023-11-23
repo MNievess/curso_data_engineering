@@ -1,6 +1,4 @@
 
-
-
 with src_dim_time_day as (
 
     select * from {{ ref('stg_time_day') }}
