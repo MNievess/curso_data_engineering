@@ -8,24 +8,29 @@ WITH stg_users1 AS (
     FROM {{ ref('stg_sql_server_dbo_addresses') }}
     ),
 
-renamed_casted AS (
+complex_users_renamed_casted AS (
     SELECT
         user_id,
-        updated_at,
-        last_name,
-        created_at,
-        phone_number,
-        total_orders,
         first_name,
+        last_name,
+        full_name,
+        phone_number,
         email,
         a.address_id,
+        full_address,
+        address,
         zipcode,
         country,
-        address,
-        state
-        
+        state,
+        date_created_at_utc,
+        time_created_at_utc,
+        full_created_at,
+        date_updated_at_utc,
+        time_updated_at_utc,
+        full_updated_at
+
     FROM stg_users1 u
     join stg_addresses1 a on u.address_id=a.address_id
     )
 
-SELECT * FROM renamed_casted
+SELECT * FROM complex_users_renamed_casted
