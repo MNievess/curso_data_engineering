@@ -9,11 +9,12 @@ with src_events as (
 src_events_casted as (
 
     select
+        
+        event_id,
+        session_id,
         user_id,
         event_type,
-        event_id,
         page_url,
-        session_id,
         product_id,
         order_id,
         full_created_at,

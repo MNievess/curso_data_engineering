@@ -25,7 +25,7 @@ src_users_casted AS (
         to_date(updated_at) as date_updated_at_utc,
         to_time(updated_at) as time_updated_at_utc,
         updated_at as full_updated_at,
-        total_orders::number(38,0) as total_orders,
+        --total_orders::number(38,0) as total_orders,
         _fivetran_deleted::boolean as _fivetran_deleted,
         _fivetran_synced::timestamp_ntz as date_load
     FROM src_users

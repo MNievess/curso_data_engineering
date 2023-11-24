@@ -1,4 +1,5 @@
 
+
 with src_time_hour as (
 
     {{ dbt_date.get_base_dates(n_dateparts=24*28, datepart="hour") }}

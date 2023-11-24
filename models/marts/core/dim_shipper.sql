@@ -14,8 +14,8 @@ src_shipping as (
 
 src_shipping_casted as (
 
-    select
-        tracking_id,    --poner como pk en el yml de las dim
+    select distinct
+        shipping_id,
         shipping_service,
         _fivetran_deleted,
         date_load

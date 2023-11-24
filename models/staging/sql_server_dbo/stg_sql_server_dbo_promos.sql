@@ -17,6 +17,7 @@ stg_promos as (
         cast(promo_id as varchar(50)) as promo_name,
         discount::number(38,0) as discount_usd,
         status::varchar(50) as promo_status,
+        _fivetran_deleted,
         _fivetran_synced as date_load
     from src_promos
 )
