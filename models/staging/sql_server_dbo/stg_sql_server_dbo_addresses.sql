@@ -1,20 +1,20 @@
 with src_addresses as (
 
-    select * from {{ ref('base_addresses') }}
+    select * from {{ source('sql_server_dbo', 'addresses') }}
 
 ),
 
 src_addresses_casted as (
     select
         address_id,
-        full_address,
+        --full_address,
         address,
         zipcode,
         country,
         state,
         --coordenates
         _fivetran_deleted,
-        date_load
+        _fivetran_synced as date_load
     from src_addresses
 )
 

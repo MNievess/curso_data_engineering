@@ -1,0 +1,239 @@
+version: 2
+
+sources:
+  - name: seed_data
+    database: alumno18_dev_bronze_db
+    tables:
+      - name: category
+        columns:
+          - name: category_id
+            data_type: varchar
+            descripcion: ""
+            tests:
+              - unique
+              - not_null
+              
+          - name: employee_id
+            data_type: number
+
+          - name: category_name
+            data_type: varchar
+
+          - name: rating
+            data_type: number
+
+          - name: quantity_sold
+            data_type: number
+
+          - name: being_manufactured
+            data_type: number
+
+          - name: total_sold_value
+            data_type: number
+
+      - name: customer
+        columns:
+          - name: customer_id
+            data_type: number
+            descripcion: ""
+            tests:
+              - unique
+              - not_null
+              
+          - name: employee_id
+            data_type: number
+
+          - name: firstname
+            data_type: varchar
+
+          - name: lastname
+            data_type: varchar
+
+          - name: dof
+            data_type: date
+
+          - name: phone
+            data_type: varchar
+
+          - name: email
+            data_type: varchar
+
+          - name: city
+            data_type: varchar
+
+          - name: country
+            data_type: varchar
+
+      - name: employee
+        columns:
+          - name: employee_id
+            data_type: number
+            descripcion: ""
+            tests:
+              - unique
+              - not_null
+
+          - name: store_id
+            data_type: number
+
+          - name: firstname
+            data_type: varchar
+
+          - name: lastname
+            data_type: varchar
+
+          - name: dof
+            data_type: date
+
+          - name: phone
+            data_type: varchar
+
+          - name: email
+            data_type: varchar
+
+          - name: status
+            data_type: varchar
+
+          - name: salary
+            data_type: number
+
+          - name: street
+            data_type: varchar
+
+          - name: city
+            data_type: varchar
+
+          - name: country
+            data_type: varchar
+
+      - name: order
+        columns:
+          - name: order_id
+            data_type: varchar
+            descripcion: ""
+            tests:
+              - unique
+              - not_null
+
+          - name: customer_id
+            data_type: number
+
+          - name: product_id
+            data_type: number
+
+          - name: store_id
+            data_type: number
+
+          - name: employee_id
+            data_type: number
+
+          - name: order_date
+            data_type: date
+
+          - name: shipped_date
+            data_type: date
+
+          - name: required_date
+            data_type: date
+
+          - name: order_status
+            data_type: varchar
+
+          - name: quantity
+            data_type: number
+
+      - name: product
+        columns:
+          - name: product_id
+            data_type: number
+            descripcion: ""
+            tests:
+              - unique
+              - not_null
+
+          - name: provider_id
+            data_type: varchar
+
+          - name: category_id
+            data_type: varchar
+
+          - name: product_name
+            data_type: varchar
+
+          - name: model
+            data_type: varchar
+
+          - name: year
+            data_type: number
+
+          - name: color
+            data_type: varchar
+
+          - name: km
+            data_type: number
+
+          - name: price
+            data_type: number
+
+      - name: provider
+        columns:
+          - name: provider_id
+            data_type: varchar
+            descripcion: ""
+            tests:
+              - unique
+              - not_null
+
+          - name: employee_id
+            data_type: number
+
+          - name: provider_name
+            data_type: varchar
+
+          - name: debt
+            data_type: number
+
+          - name: phone
+            data_type: varchar
+
+          - name: email
+            data_type: varchar
+
+          - name: city
+            data_type: varchar
+
+          - name: country
+            data_type: varchar
+
+      - name: store
+        columns:
+          - name: store_id
+            data_type: number
+            descripcion: ""
+            tests:
+              - unique
+              - not_null
+
+          - name: employee_id
+            data_type: number
+
+          - name: store_name
+            data_type: varchar
+
+          - name: phone
+            data_type: varchar
+
+          - name: street
+            data_type: varchar
+
+          - name: city
+            data_type: varchar
+
+          - name: country
+            data_type: varchar
+
+          - name: email
+            data_type: varchar
+
+          - name: post_code
+            data_type: number
