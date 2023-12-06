@@ -16,16 +16,14 @@ with src_time_day as (
 src_time_day_casted as (
 select 
 
-    year(date_day)*10000+month(date_day)*100+day(date_day) as id_date,
-    year(date_day)*100+month(date_day) as id_year_month,
-    date_day as _date,
-    concat(year(date_day),'-',month(date_day)) as year_month,
-    year(date_day) as _year,
-    month(date_day) as _month, 
-    monthname(date_day) as month_name,
+    year(date_day)*10000+month(date_day)*100+day(date_day) as date_id,
+    date_day as full_date,
     date_day-1 as previous_day,
-    year(date_day)||weekiso(date_day)||dayofweek(date_day) as year_week_day,
-    weekiso(date_day) as week
+    date_day+1 as next_day,
+    concat(month(date_day),'-',year(date_day)) as month_year,
+    year(date_day) as _year,
+    --monthname(date_day) as month_name,
+    concat(weekiso(date_day),'-',_year) as week_year
 
 from src_time_day
 )
