@@ -1,0 +1,335 @@
+version: 2
+
+sources:
+  - name: seed_data
+    schema: seed_data
+    database: ALUMNO18_DEV_BRONZE_DB 
+    tables:
+      
+      - name: categories
+        description: ""
+
+        columns:
+          - name: category_id
+            data_type: varchar
+            description: ""
+            tests:
+              - unique
+              - not_null
+      
+          - name: category_name
+            description: ""
+            tests:
+              - not_null
+          
+      - name: stocks
+        description: ""
+
+        columns:
+          - name: stock_id
+            data_type: varchar
+            description: ""
+            tests:
+              - unique
+              - not_null
+      
+          - name: product_id
+            description: ""
+            tests:
+              - not_null  
+
+          - name: quantity
+            description: ""
+            tests:
+              - not_null 
+
+      - name: brands
+        description: ""
+
+        columns:
+          - name: brand_id
+            data_type: varchar
+            description: ""
+            tests:
+              - unique
+              - not_null
+      
+          - name: brand_name
+            description: ""
+            tests:
+              - not_null  
+
+      - name: products
+        description: ""
+
+        columns:
+          - name: product_id
+            data_type: varchar
+            description: ""
+            tests:
+              - unique
+              - not_null
+      
+          - name: product_name
+            description: ""
+            tests:
+              - not_null  
+
+          - name: brand_id
+            description: ""
+            tests:
+              - not_null  
+
+          - name: category_id
+            data_type: varchar
+            description: ""
+            tests:
+              - not_null
+      
+          - name: model_year
+            description: ""
+            tests:
+              - not_null  
+
+          - name: list_price
+            description: ""
+            tests:
+              - not_null                
+
+      - name: stores
+        description: ""
+
+        columns:
+          - name: store_id
+            data_type: varchar
+            description: ""
+            tests:
+              - unique
+              - not_null
+      
+          - name: store_name
+            description: ""
+            tests:
+              - not_null  
+
+          - name: phone
+            description: ""
+            tests:
+              - not_null  
+
+          - name: email
+            data_type: varchar
+            description: ""
+            tests:
+              - unique
+              - not_null
+      
+          - name: street
+            description: ""
+            tests:
+              - not_null  
+
+          - name: city
+            description: ""
+            tests:
+              - not_null   
+
+          - name: state
+            description: ""
+            tests:
+              - not_null  
+
+          - name: zipcode
+            description: ""
+            tests:
+              - not_null         
+
+
+      - name: orders
+        description: ""
+
+        columns:
+          - name: order_id
+            data_type: varchar
+            description: ""
+            tests:
+              - unique
+              - not_null
+      
+          - name: customer_id
+            description: ""
+            tests:
+              - not_null  
+
+          - name: order_status
+            description: ""
+            tests:
+              - not_null  
+
+          - name: order_date
+            data_type: date
+            description: ""
+            tests:
+              - not_null
+      
+          - name: required_date
+            description: ""
+            tests:
+              - not_null  
+
+          - name: shipped_date
+            description: ""
+            tests:
+              - not_null   
+
+          - name: store_id
+            description: ""
+            tests:
+              - not_null  
+
+          - name: staff_id
+            description: ""
+            tests:
+              - not_null     
+
+
+      - name: order_items
+        description: ""
+
+        columns:
+          - name: order_id
+            data_type: varchar
+            description: ""
+            tests:
+              - unique
+              - not_null
+      
+          - name: item_id
+            description: ""
+            tests:
+              - not_null  
+
+          - name: product_id
+            description: ""
+            tests:
+              - not_null  
+
+          - name: quantity
+            data_type: date
+            description: ""
+            tests:
+              - not_null
+      
+          - name: list_price
+            description: ""
+            tests:
+              - not_null  
+
+          - name: discount
+            description: ""
+            tests:
+              - not_null   
+
+
+      - name: customer
+        description: ""
+
+        columns:
+          - name: customer_id
+            data_type: varchar
+            description: ""
+            tests:
+              - unique
+              - not_null
+      
+          - name: first_name
+            description: ""
+            tests:
+              - not_null  
+
+          - name: last_name
+            description: ""
+            tests:
+              - not_null  
+
+          - name: phone
+            data_type: varchar
+            description: ""
+            tests:
+              - not_null
+      
+          - name: email
+            description: ""
+            tests:
+              - not_null  
+
+          - name: street
+            description: ""
+            tests:
+              - not_null   
+
+          - name: city
+            description: ""
+            tests:
+              - not_null  
+
+          - name: state
+            description: ""
+            tests:
+              - not_null    
+
+          - name: zipcode
+            description: ""
+            tests:
+              - not_null 
+
+      - name: staff
+        description: ""
+
+        columns:
+          - name: staff_id
+            data_type: varchar
+            description: ""
+            tests:
+              - unique
+              - not_null
+      
+          - name: first_name
+            description: ""
+            tests:
+              - not_null  
+
+          - name: last_name
+            description: ""
+            tests:
+              - not_null  
+
+          - name: phone
+            data_type: varchar
+            description: ""
+            tests:
+              - not_null
+      
+          - name: email
+            description: ""
+            tests:
+              - not_null  
+
+          - name: active
+            description: ""
+            tests:
+              - not_null   
+
+          - name: store_id
+            description: ""
+            tests:
+              - not_null  
+
+          - name: manager_id
+            description: ""
+            tests:
+              - not_null    
+
+
+
+

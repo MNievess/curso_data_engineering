@@ -43,12 +43,15 @@ models:
     staging:
       +materialized: view
       +database: "{{ env_var('DBT_ENVIRONMENTS') }}_SILVER_DB"
-      google_sheets:
-        +schema: google_sheets
-      sql_server_dbo:
-        +schema: sql_server_dbo
+      seed_data:
+        +schema: seed_data
       auxiliary:
         +schema: auxiliary
+      intermediate:
+        +schema: intermediate
+      base:
+        +schema: base
+      
       
     marts:
       +materialized: table
