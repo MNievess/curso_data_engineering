@@ -2,7 +2,7 @@ with
 
 src_status_orders as (
 
-    select * from {{ ref('stg_status_orders') }}
+    select * from {{ ref('stg_auxiliary__status_orders') }}
 
 ),
 
@@ -10,7 +10,7 @@ src_status_orders_casted as (
 
     select distinct
         status_order_id,
-        order_status
+        status_order
         
     from src_status_orders
 

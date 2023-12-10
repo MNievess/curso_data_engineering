@@ -8,10 +8,6 @@ _customer as (
     select * from {{ ref('stg_seed_data__customer') }}
 ),
 
-_snapshot_customer as (
-    select * from {{ ref('stg_seed_data__customer')}}
-),
-
 
 base_stores_casted as (
 

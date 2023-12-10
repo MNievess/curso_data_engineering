@@ -16,7 +16,7 @@ with src_time_day as (
 src_time_day_casted as (
 select 
 
-    year(date_day)*10000+month(date_day)*100+day(date_day) as date_id,
+    {{dbt_utils.generate_surrogate_key(['date_day'])}}::varchar(50) as date_id,
     date_day as full_date,
     date_day-1 as previous_day,
     date_day+1 as next_day,

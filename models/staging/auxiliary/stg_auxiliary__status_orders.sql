@@ -9,8 +9,8 @@ src_status_orders as (
 src_status_orders_casted as (
 
     select distinct
-        {{dbt_utils.generate_surrogate_key(['order_status'])}}::varchar(50) as status_order_id,
-        order_status
+        status_order_id,
+        status_order
         
     from src_status_orders
 

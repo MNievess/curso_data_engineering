@@ -16,7 +16,8 @@ src_orders_casted as (
         order_date_utf,
         required_date_utf,
         shipped_date_utf,
-        order_status
+        status_order_id,
+        status_order
         
     from src_orders
 

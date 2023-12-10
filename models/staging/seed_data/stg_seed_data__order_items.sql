@@ -14,9 +14,11 @@ src_order_items_casted as (
         {{dbt_utils.generate_surrogate_key(['product_id'])}}::varchar(50) as product_id,
         quantity::number(38,0) as order_item_quantity,
         list_price::number (38,0) as list_price_$,
-        round(list_price-(list_price*discount),2) as unity_product_price,
-        round((list_price-(list_price*discount))*order_item_quantity,2) as final_price,
-        discount::number (38,2) as order_item_discount_rate
+        round(list_price-(list_price*discount),2)::number(38,2) as unity_product_price,
+        round((list_price-(list_price*discount))*order_item_quantity,2)::number(38,2) as final_price,
+        {{dbt_utils.generate_surrogate_key(['discount'])}}::varchar(50) as discount_id,
+        discount::number(38,2) as discount_rate
+        
 
     from src_order_items
 
