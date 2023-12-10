@@ -24,4 +24,4 @@ fct_stocks_metrics3_casted as (
 )
 
 select * from fct_stocks_metrics3_casted
-order by count_products_by_model desc
+order by total_products_by_model desc

@@ -8,12 +8,9 @@ fct_order_items_s as (
     select * from {{ ref('stg_seed_data__order_items')}}
 ),
 
-
-
 int_full_products as (
     select * from {{ ref('int__full_products')}}
 ),
-
 
 
 fct_sales_store_s_casted as (
@@ -26,12 +23,11 @@ fct_sales_store_s_casted as (
         count(distinct d.brand_id) as distinct_brands_sold_by_store,
         count(distinct b.order_id) as total_orders_ordered_by_store,
         count(distinct a.customer_id) as total_customer_attended_by_store,
-        round(avg(order_item_discount_rate),4) as average_discount_by_store,
-        round(avg(d.total_price),2) as average_ticket_by_store
+        round(avg(discount_rate),4) as average_discount_by_store,
+        round(avg(final_price),2) as average_ticket_by_store
         
     from fct_orders_s a
     full join fct_order_items_s b on a.order_id=b.order_id
-    --full join fct_products c on b.product_id=c.product_id
     inner join int_full_products d on b.product_id=d.product_id
     group by a.store_id
 

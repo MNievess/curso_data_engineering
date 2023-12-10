@@ -21,7 +21,7 @@ int_products_casted as (
         model_year,
         a.category_id,
         category_name as category,
-        list_price_$
+        list_price_usd
 
     from int_products a
     full join int_brands b on a.brand_id=b.brand_id

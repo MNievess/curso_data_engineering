@@ -4,6 +4,10 @@ fct_stocks as (
     select * from {{ ref('stg_seed_data__stocks') }}
 ),
 
+fct_time as (
+    select * from {{ ref('stg_auxiliary__time_day')}}
+)
+
 
 fct_orders_casted as (
 

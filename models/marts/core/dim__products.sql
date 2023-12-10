@@ -1,39 +1,24 @@
-with int_products as (
-
-    select * from {{ ref('stg_seed_data__products') }}
-
+with dim_products as (
+    select * from {{ ref('int__full_products') }}
 ),
 
-int_brands as (
 
-    select * from {{ ref('stg_seed_data__brands') }}
-
-),
-
-int_categories as (
-
-    select * from {{ ref('stg_seed_data__categories') }}
-
-),
-
-int_products_casted as (
+dim_products_casted as (
 
     select
-        a.product_id,
-        a.product_name as product_full_name,
-        b.brand_name as brand,
-        replace(SUBSTRING(product_name, 1, CHARINDEX(' - ', product_name) - 1),brand_name,'') as model,
+        product_id,
+        product_full_name,
+        brand,
+        model,
         model_year,
-        category_name as category,
-        list_price_$
+        category,
+        list_price_usd
 
-    from int_products a
-    full join int_brands b on a.brand_id=b.brand_id
-    full join int_categories c on a.category_id=c.category_id
+    from dim_products
 
 )
 
-select * from int_products_casted
+select * from dim_products_casted
 order by brand
 
 

@@ -24,7 +24,7 @@ fct_sales_customer_casted as (
         count(distinct c.brand_id) as distinct_brands_buyed_by_customer,
         count(distinct c.category_id) as distinct_categories_buyed_by_customer,
         count(distinct b.order_id) as total_orders_ordered_by_customer,
-        round(avg(order_item_discount_rate),4) as average_discount_by_customer
+        round(avg(discount_rate),4) as average_discount_by_customer
 
         
     from fct_orders a

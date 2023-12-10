@@ -1,9 +1,7 @@
 with 
 
 fct_orders as (
-
     select * from {{ ref('stg_seed_data__orders') }}
-
 ),
 
 fct_order_items as (
@@ -23,10 +21,11 @@ fct_orders_casted as (
         b.product_id,
         b.item_id,
         b.order_item_quantity,
-        b.list_price_$ as unity_price_list,
-        c.discount_rate as discount_rate,
-        b.list_price_$-(b.list_price_$*c.discount_rate) as unity_product_price,
-        (b.list_price_$-(b.list_price_$*c.discount_rate))*b.order_item_quantity as final_price
+        b.list_price_usd as unity_price_list,
+        c.discount_id,
+        c.discount_rate,
+        b.list_price_usd-(b.list_price_usd*c.discount_rate) as unity_product_price,
+        (b.list_price_usd-(b.list_price_usd*c.discount_rate))*b.order_item_quantity as final_price
         
     from fct_orders a
     inner join fct_order_items b on a.order_id=b.order_id

@@ -1,7 +1,7 @@
 with 
 
 fct_orders as (
-    select * from {{ ref('stg_seed_data__orders') }}
+    select * from {{ ref('stg_seed_data__orders')}}
 ),
 
 fct_order_items as (
@@ -12,9 +12,10 @@ fct_status_orders as (
     select * from {{ ref('stg_auxiliary__status_orders')}}
 ),
 
-fct_discount_orders as (
-    select * from {{ ref('stg_auxiliary__discount_orders')}}
-),
+fct_time as (
+    select * from {{ ref('stg_auxiliary__time_day')}}
+)
+
 
 
 fct_orders_casted as (
@@ -31,15 +32,14 @@ fct_orders_casted as (
         b.item_id,
         b.order_item_quantity,
         b.unity_price_list as unity_price_list,
-        d.discount_rate,
+        discount_rate,
         b.unity_product_price,
         b.final_price,
         c.status_order_id
         
     from fct_orders a
     inner join fct_order_items b on a.order_id=b.order_id
-    inner join fct_status_orders c on b.status_order_id=c.status_order_id
-    inner join fct_discount_orders d on b.discount_id=d.discount_id
+    inner join fct_status_orders c on a.status_order_id=c.status_order_id
 
 )
 

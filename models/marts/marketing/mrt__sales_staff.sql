@@ -24,7 +24,7 @@ fct_sales_staff_casted as (
         count(distinct c.brand_id) as distinct_brands_sold_by_employed,
         count(distinct b.order_id) as total_orders_ordered_by_employed,
         count(a.customer_id) as total_customer_attended_by_employed,
-        round(avg(order_item_discount_rate),4) as average_discount_by_employed
+        round(avg(discount_rate),4) as average_discount_by_employed
         
     from fct_orders_staff a
     full join fct_order_items_staff b on a.order_id=b.order_id
