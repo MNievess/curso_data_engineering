@@ -22,7 +22,6 @@ select
     date_day+1 as next_day,
     concat(month(date_day),'-',year(date_day)) as month_year,
     year(date_day) as _year,
-    --monthname(date_day) as month_name,
     concat(weekiso(date_day),'-',_year) as week_year
 
 from src_time_day

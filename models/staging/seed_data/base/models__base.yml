@@ -1,0 +1,306 @@
+version: 2
+
+models:
+
+      - name: base_seed_data__products
+        description: "Tabla que contiene todos los productos que vende la tienda, en este caso cada bicicleta"
+
+        columns:
+          - name: product_id
+            data_type: varchar(50)
+            description: "Numero de identificación de cada bicicleta, con id numerados desde el 1"
+            tests:
+              - unique
+              - not_null
+      
+          - name: product_name
+            data_type: varchar(100)
+            description: "Nombre de la bicicleta, que incluye la marca, el modelo y el año del modelo"
+            tests:
+              - not_null  
+
+          - name: brand_id
+            data_type: varchar(50)
+            description: "Id de la marca de esa bicicleta"
+            tests:
+              - not_null  
+              - relationships:
+                  to: ref('stg_seed_data__brands')
+                  field: brand_id 
+
+          - name: category_id
+            data_type: varchar(50)
+            description: "Id de la categoría de esa bicicleta"
+            tests:
+              - not_null
+              - relationships:
+                  to: ref('stg_seed_data__categories')
+                  field: category_id 
+      
+          - name: model_year
+            data_type: varchar(50)
+            description: "Año de creación del modelo de cada bicicleta"
+            tests:
+              - not_null  
+
+          - name: list_price_usd
+            data_type: number(38,2)
+            description: "Precio según catálogo de cada bicicleta"
+            tests:
+              - not_null                
+
+
+      - name: base_seed_data__stores
+        description: "Tabla que contiene las tiendas de la empresa donde se venden las bicicletas"
+
+        columns:
+          - name: store_id
+            data_type: varchar(50)
+            description: "Id de cada tienda"
+            tests:
+              - unique
+              - not_null
+      
+          - name: store_name
+            data_type: varchar(100)
+            description: "Nombre de cada tienda"
+            tests:
+              - not_null  
+
+          - name: phone_number
+            data_type: number(15,0)
+            description: "Número de teléfono de contacto de la tienda"
+            tests:
+              - not_null  
+
+          - name: store_email
+            data_type: varchar(50)
+            description: "Email de contacto de la tienda"
+            tests:
+              - unique
+              - not_null
+      
+          - name: street
+            data_type: varchar(50)
+            description: "Calle donde se encuentra la tienda"
+            tests:
+              - not_null  
+
+          - name: city
+            data_type: varchar(50)
+            description: "Ciudad donde se encuentra la tienda"
+            tests:
+              - not_null   
+
+          - name: state
+            data_type: varchar(50)
+            description: "Estado de EEUU donde se encuentra la tienda"
+            tests:
+              - not_null  
+
+          - name: zipcode
+            data_type: varchar(10)
+            description: "Código postal de la dirección donde se encuentra la tienda"
+            tests:
+              - not_null         
+
+
+      - name: base_seed_data__orders
+        description: "Tabla que contiene todos los pedidos de bicicletas realizados en la empresa"
+
+        columns:
+          - name: order_id
+            data_type: varchar(50)
+            description: "Id de cada pedido"
+            tests:
+              - unique
+              - not_null
+      
+          - name: customer_id
+            data_type: varchar(50)
+            description: "ID del cliente que ha realizado la compra"
+            tests:
+              - not_null  
+              - relationships:
+                  to: ref('stg_seed_data__customer')
+                  field: customer_id 
+
+          - name: store_id
+            data_type: varchar(50)
+            description: "Tienda que ha realizado la venta de ese pedido"
+            tests:
+              - not_null  
+              - relationships:
+                  to: ref('stg_seed_data__stores')
+                  field: store_id 
+
+          - name: staff_id
+            data_type: varchar(50)
+            description: "Empleado que ha realizado la venta de ese pedido"
+            tests:
+              - not_null   
+              - relationships:
+                  to: ref('stg_seed_data__staff')
+                  field: staff_id   
+                  
+          - name: order_date_utf
+            data_type: date
+            description: "Fecha de realización del pedido"
+            tests:
+              - not_null
+      
+          - name: required_date_utf
+            data_type: date
+            description: "Fecha final para el que es solicitado el pedido"
+            tests:
+              - not_null  
+
+          - name: shipped_date_utf
+            data_type: date
+            description: "Fecha de envío del pedido"
+            tests:
+              - not_null  
+
+          - name: status_order_id
+            description: "ID del estado actual del pedido"
+            tests:
+              - not_null
+              - relationships:
+                  field: status_order_id
+                  to: ref('stg_auxiliary__status_orders')
+
+          - name: status_order
+            description: "Estado actual del pedido: pendiente, procesando, rechazado o completado"
+            tests:
+              - not_null 
+              - accepted_values:
+                  values:  pending, processing, rejected, completed
+
+
+      - name: base_seed_data__customer
+        description: "Tabla que almacena los clientes registrados"
+
+        columns:
+          - name: customer_id
+            data_type: varchar(50)
+            description: "ID del cliente"
+            tests:
+              - unique
+              - not_null
+      
+          - name: first_name
+            data_type: varchar(50)
+            description: "Nombre del cliente"
+            tests:
+              - not_null  
+
+          - name: last_name
+            data_type: varchar(50)
+            description: "Apellido del cliente"
+            tests:
+              - not_null  
+
+          - name: full_name
+            data_type: varchar(50)
+            description: "Nombre y apellido del cliente"
+            tests:
+              - not_null  
+
+          - name: phone_number
+            data_type: varchar(15)
+            description: "Teléfono de contacto del cliente"
+            tests:
+              - not_null
+      
+          - name: email
+            data_type: varchar(50)
+            description: "Email de contacto del cliente"
+            tests:
+              - not_null  
+
+          - name: street
+            data_type: varchar(100)
+            description: "Calle de la dirección donde vive el cliente"
+            tests:
+              - not_null   
+
+          - name: city
+            data_type: varchar(50)
+            description: "Ciudad del cliente"
+            tests:
+              - not_null  
+
+          - name: state
+            data_type: varchar(50)
+            description: "Estado de EEUU del cliente"
+            tests:
+              - not_null    
+
+          - name: zip_code
+            data_type: varchar(10)
+            description: "Código postal de la dirección del cliente"
+            tests:
+              - not_null 
+
+
+      - name: base_seed_data__staff
+        description: "Tabla que contiene a todos los empleados de la empresa"
+
+        columns:
+          - name: staff_id
+            data_type: varchar(50)
+            description: "Id de cada empleado"
+            tests:
+              - unique
+              - not_null
+      
+          - name: first_name
+            data_type: varchar(50)
+            description: "Nombre del empleado"
+            tests:
+              - not_null  
+
+          - name: last_name
+            data_type: varchar(50)
+            description: "Apellido del empleado"
+            tests:
+              - not_null  
+
+          - name: phone
+            data_type: varchar(50)
+            description: "Teléfono de contacto del empleado"
+      
+          - name: email
+            data_type: varchar(50)
+            description: "Email corporativo del empleado"
+            tests:
+              - not_null  
+
+          - name: active
+            data_type: varchar(50)
+            description: "Situación actual del empleado registrado, si está activo en el trabajo o no (de baja, excedencia, etc)"
+            tests:
+              - not_null 
+              - accepted_values:
+                  values:
+                    - "active, inactive"  
+
+          - name: store_id
+            data_type: varchar(50)
+            description: "Id de la tienda donde trabaja el empleado"
+            tests:
+              - not_null  
+              - relationships:
+                  to: ref('stg_seed_data__stores')
+                  field: store_id 
+
+          - name: manager_id
+            data_type: varchar(50)
+            description: "Id del manager del empleado"  
+            tests:
+              - relationships:
+                  to: ref('stg_seed_data__staff')
+                  field: staff_id 
+
+
+

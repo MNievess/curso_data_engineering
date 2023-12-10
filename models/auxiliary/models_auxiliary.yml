@@ -1,0 +1,81 @@
+version: 2
+
+models:
+
+  - name: stg_time_day
+    description: "Esta tabla contiene las fechas del año en diferentes formatos"
+    columns:
+      - name: date_id
+        description: "El identificador único de cada fecha, basado en el último día de cada mes"
+        tests:
+          - unique
+          - not_null
+
+      - name: full_date
+        description: "La fecha completa: dia, mes y año"
+        tests:
+          - not_null
+
+      - name: previous_day
+        description: "El día anterior"
+        tests:
+          - not_null
+
+      - name: next_day
+        description: "El día siguiente"
+        tests:
+          - not_null  
+
+      - name: month_year
+        description: "El mes y el año"
+        tests:
+          - not_null
+
+      - name: _year
+        description: "El año"
+        tests:
+          - not_null
+
+      - name: week_year
+        description: "La semana y el año"
+        tests:
+          - not_null
+
+    
+  - name: stg_auxiliary__discount_orders
+    description: "Tabla auxiliar donde se guarda el descuento y su ID"
+    columns:
+      - name: discount_id
+        data_type: varchar(50)
+        description: "El ID del descuento"
+        tests:
+          - not_null
+          - unique
+              
+      - name: discount_rate
+        data_type: number(38,2)
+        description: "El descuento que se aplica, en porcentaje"
+        tests:
+          - not_null
+
+
+  - name: stg_auxiliary__status_orders
+    description: "Tabla que almacena los posibles estados del pedido"
+    columns:
+      - name: status_order_id
+        data_type: varchar(50)
+        description: "El ID del estado del pedido"
+        tests:
+          - not_null
+          - unique
+              
+      - name: status_order
+        data_type: varchar(50)
+        description: "El tipo de estado que puede tener el pedido"
+        tests:
+          - not_null
+
+
+
+              
+

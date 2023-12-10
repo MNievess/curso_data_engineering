@@ -45,19 +45,32 @@ models:
       +database: "{{ env_var('DBT_ENVIRONMENTS') }}_SILVER_DB"
       seed_data:
         +schema: seed_data
-      auxiliary:
-        +schema: auxiliary
-      intermediate:
-        +schema: intermediate
-      base:
-        +schema: base
-      
-      
+        base:
+          +schema: base
+
+    intermediate:
+      +materialized: view
+      +database: "{{ env_var('DBT_ENVIRONMENTS') }}_SILVER_DB"
+      +schema: intermediate
+
+    auxiliary:
+      +materialized: view
+      +database: "{{ env_var('DBT_ENVIRONMENTS') }}_SILVER_DB"
+      +schema: auxiliary
+
     marts:
       +materialized: table
       +database: "{{ env_var('DBT_ENVIRONMENTS') }}_GOLD_DB"
       core:
         +schema: core
+
+      marketing: 
+        +schema: marketing
+
+      product_provider: 
+        +schema: product_provider
+
+
 seeds:
   +schema: seed_data
   +database: "{{ env_var('DBT_ENVIRONMENTS') }}_BRONZE_DB"        
