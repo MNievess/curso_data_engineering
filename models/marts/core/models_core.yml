@@ -1,0 +1,218 @@
+version: 2
+
+models:
+  - name: dim__addresses
+    description: ""
+    columns:
+      - name: address_id
+        data_type: varchar
+        description: "ID de la tabla"
+
+      - name: street
+        data_type: varchar
+        description: "Calle de la dirección donde vive el cliente"
+
+      - name: city
+        data_type: varchar
+        description: "Ciudad del cliente"
+
+      - name: state
+        data_type: varchar
+        description: "Estado de EEUU del cliente"
+
+      - name: zip_code
+        data_type: varchar
+        description: "Código postal de la dirección del cliente"
+
+  - name: dim__persons
+    description: ""
+    columns:
+      - name: first_name
+        data_type: varchar
+        description: "Nombre del cliente"
+
+      - name: last_name
+        data_type: varchar
+        description: "Apellido del cliente"
+
+      - name: full_name
+        data_type: varchar
+        description: "Nombre y apellido del cliente"
+
+      - name: phone_number
+        data_type: varchar
+        description: "Teléfono de contacto del cliente"
+
+      - name: email
+        data_type: varchar
+        description: "Email de contacto del cliente"
+
+      - name: address_id
+        data_type: varchar
+        description: "ID de la dirección de cada persona"
+
+      - name: staff_id
+        data_type: varchar
+        description: "Id de cada empleado"
+
+      - name: store_id
+        data_type: varchar
+        description: "Id de la tienda donde trabaja el empleado"
+
+      - name: manager_id
+        data_type: varchar
+        description: "Id del manager del empleado"
+
+      - name: staff_active_inactive
+        data_type: varchar
+        description: "Estado activo o inactivo del empleado"
+
+  - name: dim__products
+    description: ""
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Numero de identificación de cada bicicleta, con id numerados desde el 1"
+
+      - name: product_full_name
+        data_type: varchar
+        description: "Nombre completo del producto, incluyendo marca, modelo y año del modelo"
+
+      - name: brand
+        data_type: varchar
+        description: "Nombre de la marca de bicicleta"
+
+      - name: model
+        data_type: varchar
+        description: "Nombre del modelo de bicicleta"
+
+      - name: model_year
+        data_type: number
+        description: "Año de creación del modelo de cada bicicleta"
+
+      - name: category
+        data_type: varchar
+        description: "Nombre de la categoría de bicicletas"
+
+      - name: list_price_usd
+        data_type: number
+        description: "Precio según catálogo de cada bicicleta"
+
+  - name: dim__status_orders
+    description: ""
+    columns:
+      - name: status_order_id
+        data_type: varchar
+        description: "El ID del estado del pedido"
+
+      - name: status_order
+        data_type: varchar
+        description: "El tipo de estado que puede tener el pedido"
+
+  - name: dim__stores
+    description: ""
+    columns:
+      - name: store_id
+        data_type: varchar
+        description: "Id de cada tienda"
+
+      - name: store_name
+        data_type: varchar
+        description: "Nombre de cada tienda"
+
+      - name: phone_number
+        data_type: number
+        description: "Número de teléfono de contacto de la tienda"
+
+      - name: store_email
+        data_type: varchar
+        description: "Email de contacto de la tienda"
+
+  - name: fct__sales
+    description: ""
+    columns:
+      - name: order_id
+        data_type: varchar
+        description: "Id del pedido"
+
+      - name: customer_id
+        data_type: varchar
+        description: "ID del cliente que ha realizado la compra"
+
+      - name: store_id
+        data_type: varchar
+        description: "ID de la tienda donde se ha hecho la venta"
+
+      - name: staff_id
+        data_type: varchar
+        description: "ID del empleado que ha hecho la venta"
+
+      - name: order_date_utf
+        data_type: date
+        description: "Fecha de creación del pedido"
+
+      - name: required_date_utf
+        data_type: date
+        description: "Fecha de requerimiento del pedido por parte del cliente"
+
+      - name: shipped_date_utf
+        data_type: date
+        description: "Fecha de entrega de los productos del pedido"
+
+      - name: product_id
+        data_type: varchar
+        description: "ID del producto"
+
+      - name: item_id
+        data_type: number
+        description: "Número que indica, de todos los productos contenidos en el pedido, el orden que ocupa: primero, segundo,..."
+
+      - name: order_item_quantity
+        data_type: number
+        description: "Cantidad de productos iguales pedidos"
+
+      - name: unity_price_list
+        data_type: number
+        description: "Precio unitario del producto"
+
+      - name: discount_rate
+        data_type: number
+        description: "El descuento que se aplica, en porcentaje"
+
+      - name: unity_product_price
+        data_type: number
+        description: "El precio del producto con el descuento aplicado"
+
+      - name: final_price
+        data_type: number
+        description: "El precio final de todos los productos iguales (precio del producto con el descuento aplicado * cantidad de productos)"
+
+      - name: status_order_id
+        data_type: varchar
+        description: "ID de la tabla estado de la venta"
+
+  - name: fct__stocking
+    description: ""
+    columns:
+      - name: stock_id
+        data_type: varchar
+        description: "Numero de identificación del stock, con id numerados desde el 1"
+
+      - name: store_id
+        data_type: varchar
+        description: ""
+
+      - name: updated_at
+        data_type: date
+        description: ""
+
+      - name: product_id
+        data_type: varchar
+        description: "Productos del stock, con id numerados desde el 1"
+
+      - name: quantity_total_stock
+        data_type: number
+        description: ""
+
+
+        

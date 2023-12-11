@@ -33,8 +33,6 @@ base_customer_casted as (
     from _customer
 )
 
-
-
 select * from base_customer_casted
 union all
 select * from base_stores_casted

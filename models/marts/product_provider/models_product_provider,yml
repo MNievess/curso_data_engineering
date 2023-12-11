@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: mrt_stock_brands
+    description: ""
+    columns:
+      - name: 
+        data_type: 
+        description: 
+        tests:
+          - not_null
+          - unique
+
+      - name: 
+        data_type: 
+        description: 
+        tests:
+          - not_null
+              
+      - name: 
+        data_type: 
+        description: 
+        tests:
+          - not_null
+
+      - name: 
+        data_type: 
+        description: 
+        tests:
+          - not_null
+
+      - name: 
+        data_type: 
+        description: 
+        tests:
+          - not_null
+
+      - name: 
+        data_type: 
+        description: 
+        tests:
+          - not_null
+
+      - name: 
+        data_type: 
+        description: 
+        tests:
+          - not_null
+
+      - name: 
+        data_type: 
+        description: 
+        tests:
+          - not_null
+
+
+
+
+          
+
+  - name: mrt_stock_categories
+    description: ""
+    columns:
+
+
+  - name: mrt_stock_models
+    description: ""
+    columns:
+

@@ -1,0 +1,264 @@
+version: 2
+
+models:
+
+  
+  - name: int__addresses
+    description: "Tabla intermedia que aúna las direcciones tanto de la tabla staff como de customer"
+    columns:
+      - name: address_id
+        data_type: varchar
+        description: "ID de la tabla"
+        tests:
+          - unique
+          - not_null
+
+      - name: street
+        data_type: varchar
+        description: "Calle de la dirección donde vive el cliente"
+        tests:
+          - not_null
+
+      - name: city
+        data_type: varchar
+        description: "Ciudad del cliente"
+        tests:
+          - not_null
+
+      - name: state
+        data_type: varchar
+        description: "Estado de EEUU del cliente"
+        tests:
+          - not_null
+
+      - name: zip_code
+        data_type: varchar
+        description: "Código postal de la dirección del cliente"
+        tests:
+          - not_null
+
+  - name: int__full_products
+    description: "Tabla intermedia que aúna las tablas products, brands y categories"
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Numero de identificación de cada bicicleta, con id numerados desde el 1"
+        tests:
+          - not_null
+          - unique
+
+      - name: product_full_name
+        data_type: varchar
+        description: "Nombre completo del producto, incluyendo marca, modelo y año del modelo"
+        tests:
+          - not_null
+
+      - name: brand_id
+        data_type: varchar
+        description: "Numero de identificación de cada marca comercial de las bicicletas, con id numerados desde el 1"
+        tests:
+          - not_null
+
+      - name: brand
+        data_type: varchar
+        description: "Nombre de la marca de bicicleta"
+        tests:
+          - not_null
+
+      - name: model
+        data_type: varchar
+        description: "Nombre del modelo de bicicleta"
+        tests:
+          - not_null
+
+      - name: model_year
+        data_type: number
+        description: "Año de creación del modelo de cada bicicleta"
+        tests:
+          - not_null
+
+      - name: category_id
+        data_type: varchar
+        description: "Categorías de bicicletas, con id numerados desde el 1"
+        tests:
+          - not_null
+
+      - name: category
+        data_type: varchar
+        description: "Nombre de la categoría de bicicletas"
+        tests:
+          - not_null
+
+      - name: list_price_usd
+        data_type: number
+        description: "Precio según catálogo de cada bicicleta"
+        tests:
+          - not_null
+
+
+  - name: int__order_items
+    description: "Tabla intermedia que unifica las tablas orders y order_items, poniendo el grando en products"
+    columns:
+      - name: order_id
+        data_type: varchar
+        description: "Id del pedido"
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        data_type: varchar
+        description: "ID del cliente que ha realizado la compra"
+        tests:
+          - not_null
+
+      - name: store_id
+        data_type: varchar
+        description: "ID de la tienda donde se ha hecho la venta"
+        tests:
+          - not_null
+
+      - name: staff_id
+        data_type: varchar
+        description: "ID del empleado que ha hecho la venta"
+        tests:
+          - not_null
+
+      - name: status_order_id
+        data_type: varchar
+        description: "ID de la tabla estado de la venta"
+        tests:
+          - not_null
+
+      - name: status_order
+        data_type: varchar
+        description: "estado de la venta"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['pending', 'processing', 'rejected', 'completed']
+
+      - name: order_date_utf
+        data_type: date
+        description: "Fecha de creación del pedido"
+        tests:
+          - not_null
+
+      - name: required_date_utf
+        data_type: date
+        description: "Fecha de requerimiento del pedido por parte del cliente"
+        tests:
+          - not_null
+
+      - name: shipped_date_utf
+        data_type: date
+        description: "Fecha de entrega de los productos del pedido"
+        tests:
+          - not_null
+
+      - name: product_id
+        data_type: varchar
+        description: "ID del producto"
+        tests:
+          - not_null
+
+      - name: item_id
+        data_type: number
+        description: "Número que indica, de todos los productos contenidos en el pedido, el orden que ocupa: primero, segundo,..."
+
+      - name: order_item_quantity
+        data_type: number
+        description: "Cantidad de productos iguales pedidos"
+        tests:
+          - not_null
+
+      - name: unity_price_list
+        data_type: number
+        description: "Precio unitario del producto"
+        tests:
+          - not_null
+
+      - name: discount_id
+        data_type: varchar
+        description: "El ID del descuento"
+        tests:
+          - not_null
+
+      - name: discount_rate
+        data_type: number
+        description: "El descuento que se aplica, en porcentaje"
+        tests:
+          - not_null
+
+      - name: unity_product_price
+        data_type: number
+        description: "El precio del producto con el descuento aplicado"
+        tests:
+          - not_null
+
+      - name: final_price
+        data_type: number
+        description: "El precio final de todos los productos iguales (precio del producto con el descuento aplicado * cantidad de productos)"
+        tests:
+          - not_null
+
+
+  - name: int__persons
+    description: "Tabla intermedia que unifica los datos personales de todas las personas de las tablas customer y staff"
+    columns:
+      - name: first_name
+        data_type: varchar
+        description: "Nombre del cliente"
+        tests:
+          - not_null
+          - unique
+          
+      - name: last_name
+        data_type: varchar
+        description: "Apellido del cliente"
+        tests:
+          - not_null
+
+      - name: full_name
+        data_type: varchar
+        description: "Nombre y apellido del cliente"
+        tests:
+          - not_null
+
+      - name: phone_number
+        data_type: varchar
+        description: "Teléfono de contacto del cliente"
+
+      - name: email
+        data_type: varchar
+        description: "Email de contacto del cliente"
+        tests:
+          - not_null
+
+      - name: address_id
+        data_type: varchar
+        description: "ID de la dirección de cada persona"
+        tests:
+          - not_null
+
+      - name: staff_id
+        data_type: varchar
+        description: "Id de cada empleado"
+
+      - name: store_id
+        data_type: varchar
+        description: "Id de la tienda donde trabaja el empleado"
+
+      - name: manager_id
+        data_type: varchar
+        description: "Id del manager del empleado"
+
+      - name: staff_active_inactive
+        data_type: varchar
+        description: "Estado activo o inactivo del empleado"
+        tests:
+          - accepted_values:
+              values:
+                - ['active', 'inactive']
+
+
