@@ -35,3 +35,4 @@ fct_sales_staff_casted as (
 
 select * from fct_sales_staff_casted
 order by total_price_earned_by_employed desc
+

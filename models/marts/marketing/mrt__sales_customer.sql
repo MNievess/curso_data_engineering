@@ -37,3 +37,4 @@ fct_sales_customer_casted as (
 
 select * from fct_sales_customer_casted
 order by total_price_payed_by_customer desc
+

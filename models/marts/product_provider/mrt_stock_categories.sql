@@ -17,8 +17,6 @@ fct_stocks_metrics2_casted as (
         count (distinct store_id) as total_stores_have_category,
         count (distinct brand_id) as total_brands_by_category
     
-        
-        
     from fct_stocks a
     inner join fct_products b on a.product_id=b.product_id
     group by category_id

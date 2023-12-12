@@ -18,7 +18,7 @@ fct_orders_casted as (
         product_id,
         quantity_stock as quantity_total_stock
         
-        
+
     from fct_stocks
 
 )
