@@ -2,7 +2,7 @@ with
 
 src_stores as (
 
-    select * from {{ ref('stores_snapshot') }}
+    select * from {{ ref('base_seed_data__stores') }}
 
 ),
 

@@ -30,7 +30,8 @@ fct_sales_address_casted as (
         round(avg(b.discount_rate),4)               as average_discount_by_address,        
         count(distinct model)                       as distinct_models_buyed_by_address,
         count(distinct c.brand_id)                  as distinct_brands_buyed_by_address,
-        count(distinct c.category_id)               as distinct_categories_buyed_by_address
+        count(distinct c.category_id)               as distinct_categories_buyed_by_address,
+        avg(shipped_date_utf-order_date_utf)        as average_time_order_to_shipped
  
     from int_order_items b
     inner join int_full_products c on b.product_id=c.product_id

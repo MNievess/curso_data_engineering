@@ -2,7 +2,7 @@ with
 
 src_customer as (
 
-    select * from {{ ref('customer_snapshot') }}
+    select * from {{ ref('base_seed_data__customer') }}
 
 ),
 

@@ -5,10 +5,9 @@ fct_order_items as (
     select * from {{ ref('int__order_items')}}
 ),
 
-fct_time as (
+fct_int_time as (
     select * from {{ ref('stg_auxiliary__time_day')}}
 ),
-
 
 
 fct_sales_casted as (
@@ -30,7 +29,10 @@ fct_sales_casted as (
         final_price,
         status_order_id
         
-    from fct_order_items
+    from fct_order_items a
+    inner join fct_int_time b on a.order_date_utf=b.date_day
+    inner join fct_int_time c on a.required_date_utf=c.date_day
+    inner join fct_int_time d on a.shipped_date_utf=d.date_day
 
 )
 

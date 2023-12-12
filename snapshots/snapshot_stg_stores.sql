@@ -1,4 +1,4 @@
-{% snapshot stores_snapshot %}
+{% snapshot snapshot_stg_stores %}
 
 {{
     config(
@@ -11,6 +11,6 @@
         )
 }}
 
-select * from {{ ref('base_seed_data__stores') }}
+select * from {{ ref('stg_seed_data__stores') }}
 
 {% endsnapshot %}

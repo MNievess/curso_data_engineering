@@ -1,18 +1,18 @@
 with 
 
-fct_orders as (
+int_orders as (
     select * from {{ ref('stg_seed_data__orders') }}
 ),
 
-fct_order_items as (
+int_order_items as (
     select * from {{ ref('stg_seed_data__order_items')}}
 ),
 
-fct_discount_orders as (
+int_discount_orders as (
     select * from {{ ref('stg_auxiliary__discount_orders')}}
 ),
 
-fct_order_status as (
+int_order_status as (
     select * from {{ ref('stg_auxiliary__status_orders')}}
 ),
 
@@ -38,12 +38,14 @@ fct_orders_casted as (
         b.list_price_usd-(b.list_price_usd*c.discount_rate) as unity_product_price,
         (b.list_price_usd-(b.list_price_usd*c.discount_rate))*b.order_item_quantity as final_price
         
-        
-    from fct_orders a
-    inner join fct_order_items b on a.order_id=b.order_id
-    inner join fct_discount_orders c on b.discount_id=c.discount_id
-    inner join fct_order_status d on a.status_order_id=d.status_order_id
+    from  int_orders a
+    inner join int_order_items b on a.order_id=b.order_id
+    inner join int_discount_orders c on b.discount_id=c.discount_id
+    inner join int_order_status d on a.status_order_id=d.status_order_id
 
 )
 
 select * from fct_orders_casted
+
+
+

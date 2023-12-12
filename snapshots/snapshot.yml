@@ -1,0 +1,279 @@
+version: 2
+
+snapshots:
+  - name: snapshot_int_full_products
+    description: "Snapshot que se usa para comprobar los cambios en los productos almacenados en la base de datos, así como las marcas y las categorías"
+    docs:
+      show: true
+
+    columns:
+      - name: product_id
+        tests:
+          - not_null
+      - name: product_full_name
+        tests:
+          - not_null
+      - name: brand_id
+        tests:
+          - not_null
+      - name: brand
+        tests:
+          - not_null
+      - name: model
+        tests:
+          - not_null
+      - name: model_year
+        tests:
+          - not_null
+      - name: category_id
+        tests:
+          - not_null
+      - name: category
+        tests:
+          - not_null      
+      - name: list_price_usd
+        tests:
+          - not_null
+          
+      - name: dbt_scd_id
+      - name: dbt_updated_at
+      - name: dbt_valid_from
+      - name: dbt_valid_to
+
+
+
+  - name: snapshot_int_order_items
+    description: <Snapshot que se usa para comprobar los cambios en los pedidos>
+    meta: {<dictionary>}
+    docs:
+      show: true
+    config:
+      <snapshot_config>: <config_value>
+
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: store_id
+        tests:
+          - not_null
+      - name: staff_id
+        tests:
+          - not_null
+      - name: status_order_id
+        tests:
+          - not_null
+      - name: status_order
+        tests:
+          - not_null
+      - name: order_date_utf
+        tests:
+          - not_null
+      - name: required_date_utf
+        tests:
+          - not_null
+      - name: shipped_date_utf
+      - name: product_id
+        tests:
+          - not_null
+      - name: item_id
+        tests:
+          - not_null
+      - name: order_item_quantity
+        tests:
+          - not_null
+      - name: list_price_usd
+        tests:
+          - not_null
+      - name: discount_id
+        tests:
+          - not_null
+      - name: discount_rate
+        tests:
+          - not_null
+
+      - name: dbt_scd_id
+      - name: dbt_updated_at
+      - name: dbt_valid_from
+      - name: dbt_valid_to
+
+
+
+  - name: snapshot_stg_customer
+    description: <Snapshot que se usa para comprobar los cambios en los clientes>
+    meta: {<dictionary>}
+    docs:
+      show: true
+    config:
+      <snapshot_config>: <config_value>
+
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+
+      - name: first_name
+        tests:
+          - not_null
+
+      - name: last_name
+        tests:
+          - not_null
+
+      - name: email
+        tests:
+          - not_null
+
+      - name: phone_number
+        tests:
+          - not_null
+
+      - name: street
+        tests:
+          - not_null
+
+      - name: city
+        tests:
+          - not_null
+
+      - name: state
+        tests:
+          - not_null
+
+      - name: zip_code
+        tests:
+          - not_null
+
+      - name: dbt_scd_id
+      - name: dbt_updated_at
+      - name: dbt_valid_from
+      - name: dbt_valid_to
+
+
+
+
+  - name: snapshot_stg_staff
+    description: <Snapshot que se usa para comprobar los cambios en los empleados>
+    meta: {<dictionary>}
+    docs:
+      show: true
+    config:
+      <snapshot_config>: <config_value>
+
+    columns:
+      - name: staff_id
+        tests:
+          - not_null
+
+      - name: first_name
+        tests:
+          - not_null
+
+      - name: last_name
+        tests:
+          - not_null
+
+      - name: email
+        tests:
+          - not_null
+
+      - name: phone_number
+        tests:
+          - not_null
+
+      - name: active
+        tests:
+          - not_null
+
+      - name: store_id
+        tests:
+          - not_null
+
+      - name: manager_id
+        tests:
+          - not_null
+
+      - name: dbt_scd_id
+      - name: dbt_updated_at
+      - name: dbt_valid_from
+      - name: dbt_valid_to
+
+
+
+  - name: snapshot_stg_stock
+    description: <Snapshot que se usa para comprobar los cambios en el stock>
+    meta: {<dictionary>}
+    docs:
+      show: true
+    config:
+      <snapshot_config>: <config_value>
+
+    columns:
+      - name: store_id
+        tests:
+          - not_null
+
+      - name: product_id
+        tests:
+          - not_null
+
+      - name: quantity_stock
+        tests:
+          - not_null
+
+      - name: dbt_scd_id
+      - name: dbt_updated_at
+      - name: dbt_valid_from
+      - name: dbt_valid_to
+
+
+
+  - name: snapshot_stg_stores
+    description: <Snapshot que se usa para comprobar los cambios en las tiendas>
+    meta: {<dictionary>}
+    docs:
+      show: true
+    config:
+      <snapshot_config>: <config_value>
+
+    columns:
+      - name: store_id
+        tests:
+          - not_null
+
+      - name: store_name
+        tests:
+          - not_null
+
+      - name: phone_number
+        tests:
+          - not_null
+
+      - name: email
+        tests:
+          - not_null         
+
+      - name: street
+        tests:
+          - not_null
+
+      - name: city
+        tests:
+          - not_null
+
+      - name: state
+        tests:
+          - not_null
+
+      - name: zip_code
+        tests:
+          - not_null
+
+      - name: dbt_scd_id
+      - name: dbt_updated_at
+      - name: dbt_valid_from
+      - name: dbt_valid_to
+

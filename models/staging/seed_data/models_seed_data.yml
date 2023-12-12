@@ -4,7 +4,6 @@ models:
           
       - name: stg_seed_data__categories
         description: "Tabla con las categorías de bicicletas que están a la venta"
-
         columns:
           - name: category_id
             data_type: varchar(50)
@@ -19,9 +18,10 @@ models:
             tests:
               - not_null
           
+
+
       - name: stg_seed_data__stocks
         description: "Tabla con el registro del stock actual de todos los productos de la tienda"
-
         columns:
           - name: stock_id
             data_type: varchar(50)
@@ -48,7 +48,6 @@ models:
 
       - name: stg_seed_data__brands
         description: "Marcas comerciales de las bicicletas"
-
         columns:
           - name: brand_id
             data_type: varchar(50)
@@ -56,7 +55,7 @@ models:
             tests:
               - unique
               - not_null
-      
+
           - name: brand_name
             data_type: varchar(50)
             description: "Nombre de la marca comercial"
@@ -65,7 +64,6 @@ models:
 
       - name: stg_seed_data__products
         description: "Tabla que contiene todos los productos que vende la tienda, en este caso cada bicicleta"
-
         columns:
           - name: product_id
             data_type: varchar(50)
@@ -120,7 +118,7 @@ models:
             tests:
               - unique
               - not_null
-      
+
           - name: store_name
             data_type: varchar(50)
             description: "Nombre de cada tienda"

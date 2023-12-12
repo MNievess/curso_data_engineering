@@ -23,7 +23,7 @@ sources:
               - not_null
           
       - name: stocks
-        description: ""
+        description: "Tabla con el stock de cada producto"
 
         columns:
           - name: stock_id

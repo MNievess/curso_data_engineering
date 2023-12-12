@@ -2,7 +2,7 @@ with
 
 src_staff as (
 
-    select * from {{ ref('staff_snapshot') }}
+    select * from {{ ref('base_seed_data__staff') }}
 
 ),
 

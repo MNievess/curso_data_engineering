@@ -1,4 +1,4 @@
-{% snapshot staff_snapshot %}
+{% snapshot snapshot_stg_staff %}
 
 {{
     config(
@@ -11,6 +11,6 @@
         )
 }}
 
-select * from {{ ref('base_seed_data__staff') }}
+select * from {{ ref('stg_seed_data__staff') }}
 
 {% endsnapshot %}

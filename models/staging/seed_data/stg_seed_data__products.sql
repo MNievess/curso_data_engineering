@@ -1,6 +1,6 @@
 with src_products as (
 
-    select * from {{ ref('products_snapshot') }}
+    select * from {{ ref('base_seed_data__products') }}
 
 ),
 

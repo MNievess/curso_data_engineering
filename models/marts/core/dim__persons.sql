@@ -8,6 +8,8 @@ _person as (
 _person_casted as (
 
     select
+        person_id,
+        customer_id,
         first_name,
         last_name,
         full_name,

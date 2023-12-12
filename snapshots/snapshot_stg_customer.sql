@@ -1,4 +1,4 @@
-{% snapshot customer_snapshot %}
+{% snapshot snapshot_stg_customer %}
 
 {{
     config(
@@ -11,6 +11,6 @@
         )
 }}
 
-select * from {{ ref('base_seed_data__customer') }}
+select * from {{ ref('stg_seed_data__customer') }}
 
 {% endsnapshot %}

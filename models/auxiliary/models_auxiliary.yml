@@ -74,6 +74,8 @@ models:
         description: "El tipo de estado que puede tener el pedido"
         tests:
           - not_null
+          - accepted_values:
+              values: ['pending', 'processing', 'rejected', 'completed']
 
 
 
