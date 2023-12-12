@@ -1,0 +1,135 @@
+version: 2
+
+models:
+  - name: mrt__sales_address
+    description: "Comparativa del stock en función del modelo"
+    columns:
+      - name: address
+        data_type: varchar (50)
+        description: "Dirección compuesta por la ciudad y el estado"
+        tests:
+          - not_null
+          - unique
+
+      - name: total_customer_by_address
+        data_type: number
+        description: "Cantidad total de consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: total_price_payed_by_address
+        data_type: number
+        description: "Cantidad de dinero (dólares) pagados por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: average_price_payed_by_address
+        data_type: number
+        description: "Media de dinero (dólares) pagados por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: total_products_ordered_by_address
+        data_type: number
+        description: "Cantidad de productos pedidos por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: distinct_models_buyed_by_address
+        data_type: number
+        description: "Cantidad de modelos pedidos por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: distinct_brands_buyed_by_address
+        data_type: number
+        description: "Cantidad de marcas pedidas por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: distinct_categories_buyed_by_address
+        data_type: number
+        description: "Cantidad de categorías de bicicleta pedidas por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: total_orders_ordered_by_address
+        data_type: number
+        description: "Cantidad de pedidos realizados por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+
+  - name: mrt__sales_category
+    description: "Comparativa del stock en función de cada categoría"
+    columns:
+      - name: category_id
+        data_type: varchar (50)
+        description: "Dirección compuesta por la ciudad y el estado"
+        tests:
+          - not_null
+          - unique
+
+      - name: total_customer_attended_by_category
+        data_type: number
+        description: "Cantidad total de compradores de cada categoría"
+        tests:
+          - not_null
+
+      - name: total_price_earned_by_category
+        data_type: number
+        description: "Cantidad total de dinero (dólares) pagado por cada categoría"
+        tests:
+          - not_null
+
+      - name: total_ordered_products_by_category
+        data_type: number
+        description: "Cantidad de productos comprados por cada categoría"
+        tests:
+          - not_null
+
+      - name: distinct_models_sold_by_category
+        data_type: number
+        description: "Cantidad de modelos vendidos por cada categoría"
+        tests:
+          - not_null
+
+      - name: average_price_by_category
+        data_type: number
+        description: "Media de precio de los productos de cada categoría"
+        tests:
+          - not_null
+
+
+
+
+
+
+
+  - name: mrt__sales_brand
+    description: ""
+    columns:
+
+      - name: distinct_models_buyed_by_address
+        data_type: number
+        description: "Cantidad de modelos pedidos por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: distinct_brands_buyed_by_address
+        data_type: number
+        description: "Cantidad de marcas pedidas por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: distinct_categories_buyed_by_address
+        data_type: number
+        description: "Cantidad de categorías de bicicleta pedidas por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: total_orders_ordered_by_address
+        data_type: number
+        description: "Cantidad de pedidos realizados por los consumidores de cada ciudad"
+        tests:
+          - not_null

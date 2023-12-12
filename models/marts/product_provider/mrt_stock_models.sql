@@ -13,7 +13,7 @@ fct_stocks_metrics3_casted as (
 
     select
         product_full_name,
-        count(a.product_id) as total_products_by_model,
+        count (a.product_id) as total_products_by_model,
         count (distinct store_id) as total_stores_have_model
      
         

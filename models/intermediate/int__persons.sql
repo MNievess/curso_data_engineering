@@ -12,6 +12,8 @@ _customer as (
 base_staff_casted as (
 
     select
+        {{dbt_utils.generate_surrogate_key(['first_name','last_name','phone_number','email'])}}::varchar(50) as person_id,
+        'no_customer' as customer_id,
         first_name,
         last_name,
         full_name,
@@ -30,6 +32,8 @@ base_staff_casted as (
 base_customer_casted as (
 
     select
+        {{dbt_utils.generate_surrogate_key(['first_name','last_name','phone_number','email'])}}::varchar(50) as person_id,
+        customer_id,
         first_name,
         last_name,
         full_name,
