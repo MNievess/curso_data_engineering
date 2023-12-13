@@ -3,7 +3,7 @@
 {{
     config(
       target_schema='snapshots',
-      unique_key='store_id' and 'product_id',
+      unique_key='store_id'+'product_id',
       strategy='check',
       check_cols=['store_id','product_id','quantity_stock'],
       invalidate_hard_deletes=True,

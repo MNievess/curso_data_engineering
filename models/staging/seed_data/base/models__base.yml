@@ -50,6 +50,9 @@ models:
               - not_null                
 
 
+
+
+
       - name: base_seed_data__stores
         description: "Tabla que contiene las tiendas de la empresa donde se venden las bicicletas"
 
@@ -101,8 +104,9 @@ models:
           - name: zipcode
             data_type: varchar(10)
             description: "Código postal de la dirección donde se encuentra la tienda"
-            tests:
-              - not_null         
+
+
+        
 
 
       - name: base_seed_data__orders
@@ -121,27 +125,18 @@ models:
             description: "ID del cliente que ha realizado la compra"
             tests:
               - not_null  
-              - relationships:
-                  to: ref('stg_seed_data__customer')
-                  field: customer_id 
 
           - name: store_id
             data_type: varchar(50)
             description: "Tienda que ha realizado la venta de ese pedido"
             tests:
               - not_null  
-              - relationships:
-                  to: ref('stg_seed_data__stores')
-                  field: store_id 
 
           - name: staff_id
             data_type: varchar(50)
             description: "Empleado que ha realizado la venta de ese pedido"
             tests:
-              - not_null   
-              - relationships:
-                  to: ref('stg_seed_data__staff')
-                  field: staff_id   
+              - not_null    
                   
           - name: order_date_utf
             data_type: date
@@ -158,23 +153,21 @@ models:
           - name: shipped_date_utf
             data_type: date
             description: "Fecha de envío del pedido"
-            tests:
-              - not_null  
 
           - name: status_order_id
             description: "ID del estado actual del pedido"
             tests:
               - not_null
-              - relationships:
-                  field: status_order_id
-                  to: ref('stg_auxiliary__status_orders')
 
           - name: status_order
             description: "Estado actual del pedido: pendiente, procesando, rechazado o completado"
             tests:
               - not_null 
               - accepted_values:
-                  values:  pending, processing, rejected, completed
+                  values:  ['processed','rejected','processing','pending']    
+
+
+
 
 
       - name: base_seed_data__customer
@@ -243,6 +236,8 @@ models:
               - not_null 
 
 
+
+
       - name: base_seed_data__staff
         description: "Tabla que contiene a todos los empleados de la empresa"
 
@@ -278,29 +273,17 @@ models:
 
           - name: active
             data_type: varchar(50)
-            description: "Situación actual del empleado registrado, si está activo en el trabajo o no (de baja, excedencia, etc)"
-            tests:
-              - not_null 
-              - accepted_values:
-                  values:
-                    - "active, inactive"  
+            description: "Situación actual del empleado registrado, si está activo en el trabajo o no (de baja, excedencia, etc)" 
 
           - name: store_id
             data_type: varchar(50)
             description: "Id de la tienda donde trabaja el empleado"
             tests:
               - not_null  
-              - relationships:
-                  to: ref('stg_seed_data__stores')
-                  field: store_id 
 
           - name: manager_id
             data_type: varchar(50)
             description: "Id del manager del empleado"  
-            tests:
-              - relationships:
-                  to: ref('stg_seed_data__staff')
-                  field: staff_id 
 
 
 

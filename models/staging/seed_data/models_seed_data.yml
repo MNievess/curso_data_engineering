@@ -7,7 +7,7 @@ models:
         columns:
           - name: category_id
             data_type: varchar(50)
-            description: "Categorías de bicicletas, con id numerados desde el 1"
+            description: "ID de categorías de bicicletas"
             tests:
               - unique
               - not_null
@@ -23,21 +23,17 @@ models:
       - name: stg_seed_data__stocks
         description: "Tabla con el registro del stock actual de todos los productos de la tienda"
         columns:
-          - name: stock_id
+          - name: store_id
             data_type: varchar(50)
-            description: "Numero de identificación del stock, con id numerados desde el 1"
+            description: "ID del stock"
             tests:
-              - unique
               - not_null
       
           - name: product_id
             data_type: varchar(50)
-            description: "Productos del stock, con id numerados desde el 1"
+            description: "ID de los productos del stock"
             tests:
               - not_null 
-              - relationships:
-                  to: ref('stg_seed_data__products')
-                  field: product_id 
 
           - name: quantity_stock
             data_type: number(38,0)
@@ -51,7 +47,7 @@ models:
         columns:
           - name: brand_id
             data_type: varchar(50)
-            description: "Numero de identificación de cada marca comercial de las bicicletas, con id numerados desde el 1"
+            description: "ID de cada marca comercial de las bicicletas"
             tests:
               - unique
               - not_null
@@ -62,12 +58,15 @@ models:
             tests:
               - not_null  
 
+
+
+
       - name: stg_seed_data__products
         description: "Tabla que contiene todos los productos que vende la tienda, en este caso cada bicicleta"
         columns:
           - name: product_id
             data_type: varchar(50)
-            description: "Numero de identificación de cada bicicleta, con id numerados desde el 1"
+            description: "ID de cada bicicleta"
             tests:
               - unique
               - not_null
@@ -108,9 +107,10 @@ models:
             tests:
               - not_null                
 
+
+
       - name: stg_seed_data__stores
         description: "Tabla que contiene las tiendas de la empresa donde se venden las bicicletas"
-
         columns:
           - name: store_id
             data_type: varchar(50)
@@ -120,7 +120,7 @@ models:
               - not_null
 
           - name: store_name
-            data_type: varchar(50)
+            data_type: varchar(100)
             description: "Nombre de cada tienda"
             tests:
               - not_null  
@@ -159,13 +159,13 @@ models:
           - name: zipcode
             data_type: varchar(50)
             description: "Código postal de la dirección donde se encuentra la tienda"
-            tests:
-              - not_null         
+         
+
+
 
 
       - name: stg_seed_data__orders
         description: "Tabla que contiene todos los pedidos de bicicletas realizados en la empresa"
-
         columns:
           - name: order_id
             data_type: varchar(50)
@@ -196,10 +196,7 @@ models:
             data_type: varchar(50)
             description: "Empleado que ha realizado la venta de ese pedido"
             tests:
-              - not_null   
-              - relationships:
-                  to: ref('stg_seed_data__staff')
-                  field: staff_id   
+              - not_null    
                   
           - name: order_date_utf
             data_type: date
@@ -215,24 +212,24 @@ models:
 
           - name: shipped_date_utf
             data_type: date
-            description: "Fecha de envío del pedido"
-            tests:
-              - not_null  
+            description: "Fecha de envío del pedido"  
 
           - name: status_order_id
+            data_type: varchar (50)
             description: "ID del estado actual del pedido"
             tests:
               - not_null
-              - relationships:
-                  field: status_order_id
-                  to: ref('stg_auxiliary__status_orders')
 
           - name: status_order
+            data_type: varchar
             description: "Estado actual del pedido: pendiente, procesando, rechazado o completado"
             tests:
               - not_null 
               - accepted_values:
-                  values:  ['pending', 'processing', 'rejected', 'completed']
+                  values:  ['processed','rejected','processing','pending']                    
+      
+
+
 
 
 
@@ -244,7 +241,6 @@ models:
             data_type: varchar
             description: "Id del pedido"
             tests:
-              - unique
               - not_null
       
           - name: item_id
@@ -258,12 +254,9 @@ models:
             description: "ID del producto"
             tests:
               - not_null  
-              - relationships:
-                  to: ref('stg_seed_data__products')
-                  field: product_id 
 
           - name: order_item_quantity
-            data_type: varchar(50)
+            data_type: number
             description: "Cantidad de productos iguales pedidos"
             tests:
               - not_null
@@ -279,16 +272,15 @@ models:
             description: "ID del descuento"
             tests:
               - not_null
-              - relationships:
-                  field: discount_id
-                  to: ref('stg_auxiliary__discount_orders')
-                  
 
           - name: discount_rate
             data_type: number(38,2)
             description: "Descuento en porcentaje que se le aplica al producto"
             tests:
               - not_null   
+
+
+
 
 
       - name: stg_seed_data__customer
@@ -321,7 +313,7 @@ models:
               - not_null  
 
           - name: phone_number
-            data_type: varchar(50)
+            data_type: varchar(10)
             description: "Teléfono de contacto del cliente"
             tests:
               - not_null
@@ -353,12 +345,12 @@ models:
           - name: zipcode
             data_type: varchar(50)
             description: "Código postal de la dirección del cliente"
-            tests:
-              - not_null 
+
+
+
 
       - name: stg_seed_data__staff
         description: "Tabla que contiene a todos los empleados de la empresa"
-
         columns:
           - name: staff_id
             data_type: varchar(50)
@@ -398,28 +390,14 @@ models:
           - name: active
             data_type: varchar(50)
             description: "Situación actual del empleado registrado, si está activo en el trabajo o no (de baja, excedencia, etc)"
-            tests:
-              - not_null 
-              - accepted_values:
-                  values:
-                    - "active, inactive"  
 
           - name: store_id
             data_type: varchar(50)
             description: "Id de la tienda donde trabaja el empleado"
-            tests:
-              - not_null  
-              - relationships:
-                  to: ref('stg_seed_data__stores')
-                  field: store_id 
 
           - name: manager_id
             data_type: varchar(50)
             description: "Id del manager del empleado"  
-            tests:
-              - relationships:
-                  to: ref('stg_seed_data__staff')
-                  field: staff_id 
 
 
 

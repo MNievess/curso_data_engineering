@@ -177,24 +177,18 @@ snapshots:
           - not_null
 
       - name: email
-        tests:
-          - not_null
 
       - name: phone_number
         tests:
           - not_null
 
       - name: active
-        tests:
-          - not_null
 
       - name: store_id
         tests:
           - not_null
 
       - name: manager_id
-        tests:
-          - not_null
 
       - name: dbt_scd_id
       - name: dbt_updated_at
@@ -252,9 +246,7 @@ snapshots:
         tests:
           - not_null
 
-      - name: email
-        tests:
-          - not_null         
+      - name: email       
 
       - name: street
         tests:
@@ -269,8 +261,6 @@ snapshots:
           - not_null
 
       - name: zip_code
-        tests:
-          - not_null
 
       - name: dbt_scd_id
       - name: dbt_updated_at

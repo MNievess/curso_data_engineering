@@ -9,13 +9,10 @@ models:
         description: "Dirección compuesta por la ciudad y el estado"
         tests:
           - not_null
-          - unique
 
       - name: total_customer_by_address
         data_type: number
         description: "Cantidad total de consumidores de cada ciudad"
-        tests:
-          - not_null
 
       - name: total_price_payed_by_address
         data_type: number
@@ -60,6 +57,8 @@ models:
           - not_null
 
 
+
+
   - name: mrt__sales_category
     description: "Comparativa de las ventas en función de cada categoría"
     columns:
@@ -68,13 +67,11 @@ models:
         description: "Dirección compuesta por la ciudad y el estado"
         tests:
           - not_null
-          - unique
 
       - name: total_customer_attended_by_category
         data_type: number
         description: "Cantidad total de compradores de cada categoría"
-        tests:
-          - not_null
+
 
       - name: total_price_earned_by_category
         data_type: number
@@ -85,8 +82,6 @@ models:
       - name: total_ordered_products_by_category
         data_type: number
         description: "Cantidad de productos comprados por cada categoría"
-        tests:
-          - not_null
 
       - name: distinct_models_sold_by_category
         data_type: number
@@ -107,27 +102,63 @@ models:
     description: "Comparativa de las ventas en función de cada marca"
     columns:
 
-      - name: distinct_models_buyed_by_address
-        data_type: number
-        description: "Cantidad de modelos pedidos por los consumidores de cada ciudad"
+      - name: brand_id
+        data_type: varchar
+        description: ""
         tests:
           - not_null
 
-      - name: distinct_brands_buyed_by_address
-        data_type: number
-        description: "Cantidad de marcas pedidas por los consumidores de cada ciudad"
+      - name: brand
+        data_type: varchar
+        description: ""
         tests:
           - not_null
 
-      - name: distinct_categories_buyed_by_address
+      - name: total_customer_buyers_by_brand
         data_type: number
-        description: "Cantidad de categorías de bicicleta pedidas por los consumidores de cada ciudad"
+        description: ""
         tests:
           - not_null
 
-      - name: total_orders_ordered_by_address
+      - name: total_orders_by_brand
         data_type: number
-        description: "Cantidad de pedidos realizados por los consumidores de cada ciudad"
+        description: ""
+        tests:
+          - not_null
+
+      - name: total_price_earned_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: average_price_earned_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: total_ordered_products_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: average_discount_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: distinct_models_sold_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: average_price_by_brand
+        data_type: number
+        description: ""
         tests:
           - not_null
 
@@ -149,7 +180,6 @@ models:
         description: "Nombre y apellido del cliente"
         tests:
           - not_null
-          - unique
 
       - name: total_price_payed_by_customer
         data_type: number

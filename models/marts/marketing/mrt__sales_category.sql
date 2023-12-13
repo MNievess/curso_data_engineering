@@ -21,7 +21,7 @@ fct_sales_category_casted as (
         count(d.product_id)                 as total_products_sold_by_category,
         round(avg(b.discount_rate),4)       as average_discount_by_category,
         count(distinct model)               as distinct_models_sold_by_category,
-        count(distinct b.brand_id)          as distinct_brands_buyed_by_category,
+        count(distinct d.brand_id)          as distinct_brands_buyed_by_category,
         round(avg(d.list_price_usd),2)      as average_price_by_category
         
     from int_order_items b

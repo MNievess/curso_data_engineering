@@ -5,7 +5,7 @@
       target_schema='snapshots',
       unique_key='store_id',
       strategy='check',
-      check_cols=['store_id','store_name','phone_number','email','street','city','state','zip_code'],
+      check_cols=['store_id','store_name','phone_number','store_email','street','city','state','zip_code'],
       invalidate_hard_deletes=True,
 
         )

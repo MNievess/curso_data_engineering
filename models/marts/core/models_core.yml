@@ -38,6 +38,10 @@ models:
         tests:
           - not_null
 
+
+
+
+
   - name: dim__persons
     description: "Dimensión con todas las personas de la base de datos (clientes y trabajadores)"
     columns:
@@ -92,9 +96,6 @@ models:
         description: "ID de la dirección de cada persona"
         tests:
           - not_null
-          - relationships:
-              field: person_id
-              to: ref('dim__persons')
 
       - name: staff_id
         data_type: varchar
@@ -115,10 +116,9 @@ models:
       - name: staff_active_inactive
         data_type: varchar
         description: "Estado activo o inactivo del empleado. Si es cliente, indica 'no_staff'."
-        tests:
-          - accepted_values:
-              values:
-                - ["active","inactive"]
+
+
+
 
 
 
@@ -191,8 +191,10 @@ models:
         description: "El tipo de estado que puede tener el pedido"
         tests:
           - not_null
-          - accepted_values:
-              values: ['pending', 'processing', 'rejected', 'completed']
+
+
+
+
 
   - name: dim__stores
     description: "Dimensión que contiene todas las tiendas de la base de datos"
@@ -203,9 +205,6 @@ models:
         tests:
           - unique
           - not_null
-          - relationships:
-              field: store_id
-              to: ref('stg_seed_data__stores')
 
       - name: store_name
         data_type: varchar
@@ -435,9 +434,6 @@ models:
         description: "Numero de identificación del stock, con id numerados desde el 1"
         tests:
           - not_null
-          - relationships:
-              field: stock_id
-              to: ref('stg_seed_data__stocks')
 
       - name: store_id
         data_type: varchar

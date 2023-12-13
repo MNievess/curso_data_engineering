@@ -75,7 +75,7 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['pending', 'processing', 'rejected', 'completed']
+              values:  ['processed','rejected','processing','pending']  
 
 
 

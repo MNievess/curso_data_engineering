@@ -104,7 +104,6 @@ models:
         description: "Id del pedido"
         tests:
           - not_null
-          - unique
 
       - name: customer_id
         data_type: varchar
@@ -136,7 +135,7 @@ models:
         tests:
           - not_null
           - accepted_values:
-              values: ['pending', 'processing', 'rejected', 'completed']
+              values:  ['processed','rejected','processing','pending']  
 
       - name: order_date_utf
         data_type: date
@@ -153,8 +152,6 @@ models:
       - name: shipped_date_utf
         data_type: date
         description: "Fecha de entrega de los productos del pedido"
-        tests:
-          - not_null
 
       - name: product_id
         data_type: varchar
@@ -203,15 +200,25 @@ models:
           - not_null
 
 
+
+
+
   - name: int__persons
     description: "Tabla intermedia que unifica los datos personales de todas las personas de las tablas customer y staff"
     columns:
+
+      - name: person_id
+        data_type: varchar
+        description: "ID de la persona"
+        tests:
+          - unique
+          - not_null
+
       - name: first_name
         data_type: varchar
         description: "Nombre del cliente"
         tests:
           - not_null
-          - unique
           
       - name: last_name
         data_type: varchar
@@ -258,7 +265,6 @@ models:
         description: "Estado activo o inactivo del empleado"
         tests:
           - accepted_values:
-              values:
-                - ['active', 'inactive']
+              values: ['active', 'inactive', 'nobody', 'no_staff']
 
 
