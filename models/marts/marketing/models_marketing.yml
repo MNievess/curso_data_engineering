@@ -1,0 +1,442 @@
+version: 2
+
+models:
+  - name: mrt__sales_address
+    description: "Comparativa de las ventas en función de la ciudad"
+    columns:
+      - name: address
+        data_type: varchar (50)
+        description: "Dirección compuesta por la ciudad y el estado"
+        tests:
+          - not_null
+
+      - name: total_customer_by_address
+        data_type: number
+        description: "Cantidad total de consumidores de cada ciudad"
+
+      - name: total_price_payed_by_address
+        data_type: number
+        description: "Cantidad de dinero (dólares) pagados por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: average_price_payed_by_address
+        data_type: number
+        description: "Media de dinero (dólares) pagados por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: total_products_ordered_by_address
+        data_type: number
+        description: "Cantidad de productos pedidos por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: distinct_models_buyed_by_address
+        data_type: number
+        description: "Cantidad de modelos pedidos por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: distinct_brands_buyed_by_address
+        data_type: number
+        description: "Cantidad de marcas pedidas por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: distinct_categories_buyed_by_address
+        data_type: number
+        description: "Cantidad de categorías de bicicleta pedidas por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+      - name: total_orders_ordered_by_address
+        data_type: number
+        description: "Cantidad de pedidos realizados por los consumidores de cada ciudad"
+        tests:
+          - not_null
+
+
+
+
+  - name: mrt__sales_category
+    description: "Comparativa de las ventas en función de cada categoría"
+    columns:
+      - name: category_id
+        data_type: varchar (50)
+        description: "Dirección compuesta por la ciudad y el estado"
+        tests:
+          - not_null
+
+      - name: total_customer_attended_by_category
+        data_type: number
+        description: "Cantidad total de compradores de cada categoría"
+
+
+      - name: total_price_earned_by_category
+        data_type: number
+        description: "Cantidad total de dinero (dólares) pagado por cada categoría"
+        tests:
+          - not_null
+
+      - name: total_ordered_products_by_category
+        data_type: number
+        description: "Cantidad de productos comprados por cada categoría"
+
+      - name: distinct_models_sold_by_category
+        data_type: number
+        description: "Cantidad de modelos vendidos por cada categoría"
+        tests:
+          - not_null
+
+      - name: average_price_by_category
+        data_type: number
+        description: "Media de precio de los productos de cada categoría"
+        tests:
+          - not_null
+
+
+
+
+  - name: mrt__sales_brand
+    description: "Comparativa de las ventas en función de cada marca"
+    columns:
+
+      - name: brand_id
+        data_type: varchar
+        description: ""
+        tests:
+          - not_null
+
+      - name: brand
+        data_type: varchar
+        description: ""
+        tests:
+          - not_null
+
+      - name: total_customer_buyers_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: total_orders_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: total_price_earned_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: average_price_earned_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: total_ordered_products_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: average_discount_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: distinct_models_sold_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+      - name: average_price_by_brand
+        data_type: number
+        description: ""
+        tests:
+          - not_null
+
+
+
+
+  - name: mrt__sales_customer
+    description: "Comparativa de las ventas en función de cada cliente"
+    columns:
+      - name: customer_id
+        data_type: varchar (50)
+        description: "Id del cliente"
+        tests:
+          - not_null
+          - unique
+
+      - name: full_name_customer
+        data_type: varchar (50)
+        description: "Nombre y apellido del cliente"
+        tests:
+          - not_null
+
+      - name: total_price_payed_by_customer
+        data_type: number
+        description: "Precio total pagado por cada cliente en todas las compras que ha realizado"
+        tests:
+          - not_null
+
+      - name: average_price_payed_by_customer
+        data_type: number
+        description: "Media del precio total pagado por cada cliente en todas las compras que ha realizado"
+        tests:
+          - not_null
+
+      - name: total_products_ordered_by_customer
+        data_type: number
+        description: "Cantidad total de productos pedidos por un cliente"
+        tests:
+          - not_null
+
+      - name: distinct_models_buyed_by_customer
+        data_type: number
+        description: "Cantidad total de modelos pedidos por un cliente"
+        tests:
+          - not_null
+
+      - name: distinct_brands_buyed_by_customer
+        data_type: number
+        description: "Diferentes marcas de bicicleta pedidas por el cliente"
+        tests:
+          - not_null
+
+      - name: distinct_categories_buyed_by_customer
+        data_type: number
+        description: "Diferentes categorías de bicicleta pedidas por el cliente"
+        tests:
+          - not_null
+
+      - name: total_orders_ordered_by_customer
+        data_type: number
+        description: "Cantidad total de compras realizadas por cada cliente"
+        tests:
+          - not_null
+
+      - name: average_discount_by_customer
+        data_type: number
+        description: "Media de descuento realizado a cada cliente"
+        tests:
+          - not_null
+
+
+
+
+  - name: mrt__sales_staff
+    description: "Comparativa de las ventas en función de cada empleado"
+    columns:
+      - name: employed_id
+        data_type: varchar (50)
+        description: "Id del empleado"
+        tests:
+          - not_null
+          - unique
+
+      - name: employed_name
+        data_type: varchar (50)
+        description: "Nombre y apellido del cliente"
+        tests:
+          - not_null
+          - unique
+
+      - name: total_customer_attended_by_employed
+        data_type: number
+        description: "Número total de clientes atendidos por cada empleado"
+        tests:
+          - not_null
+
+      - name: total_price_earned_by_employed
+        data_type: number
+        description: "Cantidad total de dinero obtenido en las ventas de cada empleado"
+        tests:
+          - not_null
+
+      - name: total_products_sold_by_employed
+        data_type: number
+        description: "Cantidad total de productos vendidos por cada empleado"
+        tests:
+          - not_null
+
+      - name: distinct_models_sold_by_employed
+        data_type: number
+        description: "Diferentes productos vendidos por el empleado"
+        tests:
+          - not_null
+
+      - name: distinct_brands_sold_by_employed
+        data_type: number
+        description: "Diferentes marcas vendidas por el empleado"
+        tests:
+          - not_null
+
+      - name: total_orders_ordered_by_employed
+        data_type: number
+        description: "Cantidad total de pedidos realizados por cada empleado"
+        tests:
+          - not_null
+
+      - name: average_discount_by_employed
+        data_type: number
+        description: "Media del descuento aplicado en total por cada empleado"
+        tests:
+          - not_null
+
+
+
+
+
+  - name: mrt__dates_sales_day
+    description: "Comparativa de las ventas realizadas por día"
+    columns:
+
+      - name: date_day
+        data_type: date
+        description: "Fecha en formato yyyy-mm-dd"
+        tests:
+          - not_null
+
+      - name: sales_by_day
+        data_type: number
+        description: "Cantidad de ventas por día"
+        tests:
+          - not_null
+
+      - name: products_sold_by_day
+        data_type: number
+        description: "Cantidad de productos vendidos por día"
+        tests:
+          - not_null
+
+      - name: orders_sold_by_day
+        data_type: number
+        description: "Cantidad de pedidos realizados por día"
+        tests:
+          - not_null
+
+      - name: customer_attended_by_day
+        data_type: number
+        description: "Cantidad de clientes atendidos por día"
+        tests:
+          - not_null
+
+
+
+
+  - name: mrt__dates_sales_month
+    description: "Comparativa de las ventas realizadas por mes"
+    columns:
+
+      - name: month_year
+        data_type: date
+        description: "Fecha en formato yyyy-mm"
+        tests:
+          - not_null
+
+      - name: sales_by_month
+        data_type: number
+        description: "Cantidad de ventas por mes"
+        tests:
+          - not_null
+
+      - name: products_sold_by_month
+        data_type: number
+        description: "Cantidad de productos vendidos por mes"
+        tests:
+          - not_null
+
+      - name: orders_sold_by_month
+        data_type: number
+        description: "Cantidad de pedidos realizados por mes"
+        tests:
+          - not_null
+
+      - name: customer_attended_by_month
+        data_type: number
+        description: "Cantidad de clientes atendidos por mes"
+        tests:
+          - not_null
+
+
+
+
+  - name: mrt__dates_sales_quarter
+    description: "Comparativa de las ventas realizadas por trimestre"
+    columns:
+
+      - name: quarter_year
+        data_type: date
+        description: "Fecha en formato q-yyyy"
+        tests:
+          - not_null
+
+      - name: sales_by_quarter
+        data_type: number
+        description: "Cantidad de ventas por trimestre"
+        tests:
+          - not_null
+
+      - name: products_sold_by_quarter
+        data_type: number
+        description: "Cantidad de productos vendidos por trimestre"
+        tests:
+          - not_null
+
+      - name: orders_sold_by_quarter
+        data_type: number
+        description: "Cantidad de pedidos realizados por trimestre"
+        tests:
+          - not_null
+
+      - name: customer_attended_by_quarter
+        data_type: number
+        description: "Cantidad de clientes atendidos por trimestre"
+        tests:
+          - not_null
+
+
+
+
+  - name: mrt__dates_sales_week
+    description: "Comparativa de las ventas realizadas por semana"
+    columns:
+
+      - name: week_year
+        data_type: date
+        description: "Fecha en formato ww-yyyy"
+        tests:
+          - not_null
+
+      - name: sales_by_week
+        data_type: number
+        description: "Cantidad de ventas por semana"
+        tests:
+          - not_null
+
+      - name: products_sold_by_week
+        data_type: number
+        description: "Cantidad de productos vendidos por semana"
+        tests:
+          - not_null
+
+      - name: orders_sold_by_week
+        data_type: number
+        description: "Cantidad de pedidos realizados por semana"
+        tests:
+          - not_null
+
+      - name: customer_attended_by_week
+        data_type: number
+        description: "Cantidad de clientes atendidos por semana"
+        tests:
+          - not_null
+

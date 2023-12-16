@@ -1,0 +1,470 @@
+version: 2
+
+models:
+  - name: dim__addresses
+    description: "Dimensión con todas las direcciones de todas las personas de la base de datos (clientes y trabajadores)"
+    columns:
+      - name: address_id
+        data_type: varchar
+        description: "ID de la tabla"
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              field: address_id
+              to: ref('int__addresses')
+
+      - name: street
+        data_type: varchar
+        description: "Calle de la dirección donde vive el cliente"
+        tests:
+          - not_null
+              
+      - name: city
+        data_type: varchar
+        description: "Ciudad del cliente"
+        tests:
+          - not_null
+
+      - name: state
+        data_type: varchar
+        description: "Estado de EEUU del cliente"
+        tests:
+          - not_null
+
+      - name: zip_code
+        data_type: varchar
+        description: "Código postal de la dirección del cliente"
+        tests:
+          - not_null
+
+
+
+
+
+  - name: dim__persons
+    description: "Dimensión con todas las personas de la base de datos (clientes y trabajadores)"
+    columns:
+      - name: person_id
+        data_type: varchar
+        description: "ID que identifica la persona, sea cliente o trabajador" 
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              field: person_id
+              to: ref('int__persons')
+
+      - name: customer_id
+        data_type: varchar
+        description: "ID del cliente. Si es trabajador, indica 'no_customer'."
+        tests:
+          - not_null
+
+      - name: first_name
+        data_type: varchar
+        description: "Nombre de la persona"
+        tests:
+          - not_null
+
+      - name: last_name
+        data_type: varchar
+        description: "Apellido de la persona"
+        tests:
+          - not_null
+
+      - name: full_name
+        data_type: varchar
+        description: "Nombre y apellido de la persona"
+        tests:
+          - not_null
+
+      - name: phone_number
+        data_type: varchar
+        description: "Teléfono de contacto de la persona"
+        tests:
+          - not_null
+
+      - name: email
+        data_type: varchar
+        description: "Email de contacto de la persona"
+        tests:
+          - not_null
+
+      - name: address_id
+        data_type: varchar
+        description: "ID de la dirección de cada persona"
+        tests:
+          - not_null
+
+      - name: staff_id
+        data_type: varchar
+        description: "Id de cada empleado. Si es cliente, indica 'no_staff'."
+        tests:
+          - not_null
+
+      - name: store_id
+        data_type: varchar
+        description: "Id de la tienda donde trabaja el empleado. Si es cliente, indica 'no_staff'."
+        tests:
+          - not_null
+
+      - name: manager_id
+        data_type: varchar
+        description: "Id del manager del empleado. Si es cliente, indica 'no_staff'."
+
+      - name: staff_active_inactive
+        data_type: varchar
+        description: "Estado activo o inactivo del empleado. Si es cliente, indica 'no_staff'."
+
+
+
+
+
+
+  - name: dim__products
+    description: "Dimensión que contiene todos los productos de la base de datos, incluyendo marca, modelo, año del modelo y categoría"
+    columns:
+      - name: product_id
+        data_type: varchar
+        description: "Numero de identificación de cada bicicleta, con id numerados desde el 1"
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              field: product_id
+              to: ref('int__products')
+
+      - name: product_full_name
+        data_type: varchar
+        description: "Nombre completo del producto, incluyendo marca, modelo y año del modelo"
+        tests:
+          - not_null
+
+      - name: brand
+        data_type: varchar
+        description: "Nombre de la marca de bicicleta"
+        tests:
+          - not_null
+
+      - name: model
+        data_type: varchar
+        description: "Nombre del modelo de bicicleta"
+        tests:
+          - not_null
+
+      - name: model_year
+        data_type: number
+        description: "Año de creación del modelo de cada bicicleta"
+        tests:
+          - not_null
+
+      - name: category
+        data_type: varchar
+        description: "Nombre de la categoría de bicicletas"
+        tests:
+          - not_null
+
+      - name: list_price_usd
+        data_type: number
+        description: "Precio según catálogo de cada bicicleta"
+        tests:
+          - not_null
+
+
+
+  - name: dim__status_orders
+    description: "Dimensión con los 4 posibles estados de un pedido"
+    columns:
+      - name: status_order_id
+        data_type: varchar
+        description: "El ID del estado del pedido"
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              field: status_order_id
+              to: ref('int__order_items')
+              
+      - name: status_order
+        data_type: varchar
+        description: "El tipo de estado que puede tener el pedido"
+        tests:
+          - not_null
+
+
+
+
+
+  - name: dim__stores
+    description: "Dimensión que contiene todas las tiendas de la base de datos"
+    columns:
+      - name: store_id
+        data_type: varchar
+        description: "Id de cada tienda"
+        tests:
+          - unique
+          - not_null
+
+      - name: store_name
+        data_type: varchar
+        description: "Nombre de cada tienda"
+        tests:
+          - not_null
+
+      - name: phone_number
+        data_type: number
+        description: "Número de teléfono de contacto de la tienda"
+        tests:
+          - not_null
+
+      - name: store_email
+        data_type: varchar
+        description: "Email de contacto de la tienda"
+        tests:
+          - not_null
+
+
+
+  - name: dim__time
+    description: "Dimensión que contiene todas las fechas en varios formatos"
+    columns:
+      - name: date_id
+        data_type: varchar
+        description: "Id de cada fecha"
+        tests:
+          - unique
+          - not_null
+          - relationships:
+              field: date_id
+              to: ref('stg_auxiliary__time_day')
+
+      - name: week_year_id
+        data_type: varchar
+        description: "ID de la semana y el año"
+        tests:
+          - not_null
+
+      - name: date_day
+        data_type: date
+        description: "Fecha con año, mes y día en formato yyyy-mm-dd"
+        tests:
+          - not_null
+
+      - name: year_month_id
+        data_type: varchar
+        description: "ID del mes y el año"
+        tests:
+          - not_null
+
+      - name: full_date
+        data_type: date
+        description: "Fecha completa"
+        tests:
+          - not_null
+
+      - name: previous_day
+        data_type: date
+        description: "Fecha del día anterior al seleccionado"
+        tests:
+          - not_null
+
+      - name: next_day
+        data_type: date
+        description: "Fecha del día posterior al seleccionado"
+        tests:
+          - not_null
+
+      - name: month_year
+        data_type: varchar
+        description: "Mes y año de la fecha"
+        tests:
+          - not_null
+
+      - name: _year
+        data_type: date
+        description: "Año de la fecha"
+        tests:
+          - not_null
+
+      - name: quarter_year
+        data_type: date
+        description: "Trimestre y año de la fecha"
+        tests:
+          - not_null
+
+      - name: week_year
+        data_type: date
+        description: "Semana y año de la fecha"
+        tests:
+          - not_null
+
+      - name: now
+        data_type: date
+        description: "Fecha del momento en que se ejecute, actual"
+        tests:
+          - not_null
+
+
+    
+  - name: fct__sales
+    description: "Tabla de hechos que representa el proceso de las ventas"
+    columns:
+      - name: order_id
+        data_type: varchar
+        description: "Id del pedido"
+        tests:
+          - not_null
+          - relationships:
+              field: order_id
+              to: ref('int__order_items')
+
+      - name: customer_id
+        data_type: varchar
+        description: "ID del cliente que ha realizado la compra"
+        tests:
+          - not_null
+          - relationships:
+              field: customer_id
+              to: ref('int__persons')
+
+      - name: store_id
+        data_type: varchar
+        description: "ID de la tienda donde se ha hecho la venta"
+        tests:
+          - not_null
+          - relationships:
+              field: store_id
+              to: ref('stg_seed_data__stores')
+
+      - name: staff_id
+        data_type: varchar
+        description: "ID del empleado que ha hecho la venta"
+        tests:
+          - not_null
+          - relationships:
+              field: staff_id
+              to: ref('stg_seed_data__staff')
+
+      - name: order_date_utf
+        data_type: date
+        description: "Fecha de creación del pedido"
+        tests:
+          - not_null
+          - relationships:
+              field: date_day
+              to: ref('stg_auxiliary__time_day')
+
+      - name: required_date_utf
+        data_type: date
+        description: "Fecha de requerimiento del pedido por parte del cliente"
+        tests:
+          - not_null
+          - relationships:
+              field: date_day
+              to: ref('stg_auxiliary__time_day')
+
+      - name: shipped_date_utf
+        data_type: date
+        description: "Fecha de entrega de los productos del pedido"
+        tests:
+          - not_null
+          - relationships:
+              field: date_day
+              to: ref('stg_auxiliary__time_day')
+
+      - name: product_id
+        data_type: varchar
+        description: "ID del producto"
+        tests:
+          - not_null
+          - relationships:
+              field: product_id
+              to: ref('int__products')
+
+      - name: item_id
+        data_type: number
+        description: "Número que indica, de todos los productos contenidos en el pedido, el orden que ocupa: primero, segundo,..."
+        tests:
+          - not_null
+
+      - name: order_item_quantity
+        data_type: number
+        description: "Cantidad de productos iguales pedidos"
+        tests:
+          - not_null
+
+      - name: unity_price_list
+        data_type: number
+        description: "Precio unitario del producto"
+        tests:
+          - not_null
+
+      - name: discount_rate
+        data_type: number
+        description: "El descuento que se aplica, en porcentaje"
+        tests:
+          - not_null
+
+      - name: unity_product_price
+        data_type: number
+        description: "El precio del producto con el descuento aplicado"
+        tests:
+          - not_null
+
+      - name: final_price
+        data_type: number
+        description: "El precio final de todos los productos iguales (precio del producto con el descuento aplicado * cantidad de productos)"
+        tests:
+          - not_null
+
+      - name: status_order_id
+        data_type: varchar
+        description: "ID de la tabla estado de la venta"
+        tests:
+          - not_null
+
+
+
+  - name: fct__stocking
+    description: ""
+    columns:
+      - name: stock_id
+        data_type: varchar
+        description: "Numero de identificación del stock, con id numerados desde el 1"
+        tests:
+          - not_null
+
+      - name: store_id
+        data_type: varchar
+        description: "ID de la tienda donde se realiza el stock"
+        tests:
+          - not_null
+          - relationships:
+              field: store_id
+              to: ref('stg_seed_data__stores')
+
+      - name: updated_at
+        data_type: date
+        description: "Fecha actual, del momento en que se ejecuta la ingesta"
+        tests:
+          - not_null
+
+      - name: product_id
+        data_type: varchar
+        description: "Productos del stock, con id numerados desde el 1"
+        tests:
+          - not_null
+          - relationships:
+              field: product_id
+              to: ref('stg_seed_data__products')
+
+      - name: quantity_total_stock
+        data_type: number
+        description: "Cantidad de unidades de cada producto del stock"
+        tests:
+          - not_null
+              
+
+
+        

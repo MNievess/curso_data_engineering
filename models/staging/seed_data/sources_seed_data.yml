@@ -1,0 +1,343 @@
+version: 2
+
+sources:
+  - name: seed_data
+    schema: seed_data
+    database: ALUMNO18_DEV_BRONZE_DB 
+    tables:
+      
+      - name: categories
+        description: "Tabla con las categorías de bicicletas que están a la venta"
+
+        columns:
+          - name: category_id
+            data_type: varchar
+            description: "Categorías de bicicletas, con id numerados desde el 1"
+            tests:
+              - unique
+              - not_null
+      
+          - name: category_name
+            data_type: varchar
+            description: "Nombre de las categorias de las bicicletas"
+            tests:
+              - not_null
+          
+      - name: stocks
+        description: "Tabla con el stock de cada producto"
+
+        columns:
+          - name: store_id
+            data_type: varchar
+            description: "Numero de identificación de la tienda, con id numerados desde el 1"
+            tests:
+              - not_null
+      
+          - name: product_id
+            data_type: varchar
+            description: "Productos del stock, con id numerados desde el 1"
+            tests:
+              - not_null 
+
+          - name: quantity
+            data_type: number
+            description: "Cantidad de productos actual"
+            tests:
+              - not_null 
+  
+
+      - name: brands
+        description: "Marcas comerciales de las bicicletas"
+
+        columns:
+          - name: brand_id
+            data_type: varchar
+            description: "Numero de identificación de cada marca comercial de las bicicletas, con id numerados desde el 1"
+            tests:
+              - unique
+              - not_null
+      
+          - name: brand_name
+            data_type: varchar
+            description: "Nombre de la marca comercial"
+            tests:
+              - not_null  
+
+      - name: products
+        description: "Tabla que contiene todos los productos que vende la tienda, en este caso cada bicicleta"
+
+        columns:
+          - name: product_id
+            data_type: varchar
+            description: "Numero de identificación de cada bicicleta, con id numerados desde el 1"
+            tests:
+              - unique
+              - not_null
+      
+          - name: product_name
+            description: "Nombre de la bicicleta, que incluye la marca, el modelo y el año del modelo"
+            tests:
+              - not_null  
+
+          - name: brand_id
+            data_type: varchar
+            description: "Id de la marca de esa bicicleta"
+            tests:
+              - not_null  
+
+          - name: category_id
+            data_type: varchar
+            description: "Id de la categoría de esa bicicleta"
+            tests:
+              - not_null
+      
+          - name: model_year
+            description: "Año de creación del modelo de cada bicicleta"
+            tests:
+              - not_null  
+
+          - name: list_price
+            data_type: number
+            description: "Precio según catálogo de cada bicicleta"
+            tests:
+              - not_null                
+
+      - name: stores
+        description: "Tabla que contiene las tiendas de la empresa donde se venden las bicicletas"
+
+        columns:
+          - name: store_id
+            data_type: varchar
+            description: "Id de cada tienda"
+            tests:
+              - unique
+              - not_null
+      
+          - name: store_name
+            description: "Nombre de cada tienda"
+            tests:
+              - not_null  
+
+          - name: phone
+            data_type: varchar
+            description: "Número de teléfono de contacto de la tienda"
+            tests:
+              - not_null  
+
+          - name: email
+            data_type: varchar
+            description: "Email de contacto de la tienda"
+            tests:
+              - unique
+              - not_null
+      
+          - name: street
+            data_type: varchar
+            description: "Calle donde se encuentra la tienda"
+            tests:
+              - not_null  
+
+          - name: city
+            data_type: varchar
+            description: "Ciudad donde se encuentra la tienda"
+            tests:
+              - not_null   
+
+          - name: state
+            data_type: varchar
+            description: "Estado de EEUU donde se encuentra la tienda"
+            tests:
+              - not_null  
+
+          - name: zipcode
+            data_type: varchar
+            description: "Código postal de la dirección donde se encuentra la tienda"        
+
+
+      - name: orders
+        description: "Tabla que contiene todos los pedidos de bicicletas realizados en la empresa"
+        columns:
+          - name: order_id
+            data_type: varchar
+            description: "Id de cada pedido"
+            tests:
+              - unique
+              - not_null
+      
+          - name: customer_id
+            data_type: varchar
+            description: "ID del cliente que ha realizado la compra"
+            tests:
+              - not_null  
+
+          - name: order_status
+            data_type: varchar
+            description: "Estado actual del pedido: pendiente, procesando, rechazado o completado"
+            tests:
+              - not_null 
+                  
+          - name: order_date
+            data_type: date
+            description: "Fecha de realización del pedido"
+            tests:
+              - not_null
+      
+          - name: required_date
+            data_type: date
+            description: "Fecha final para el que es solicitado el pedido"
+            tests:
+              - not_null  
+
+          - name: shipped_date
+            data_type: date
+            description: "Fecha de envío del pedido"  
+
+          - name: store_id
+            data_type: varchar
+            description: "Tienda que ha realizado la venta de ese pedido"
+            tests:
+              - not_null  
+
+          - name: staff_id
+            data_type: varchar
+            description: "Empleado que ha realizado la venta de ese pedido"
+            tests:
+              - not_null   
+
+
+
+      - name: order_items
+        description: ""
+
+        columns:
+          - name: order_id
+            data_type: varchar
+            description: "Id del pedido"
+            tests:
+              - not_null
+      
+          - name: item_id
+            data_type: number
+            description: "Número que indica, de todos los productos contenidos en el pedido, el orden que ocupa: primero, segundo,..."
+            tests:
+              - not_null  
+
+          - name: product_id
+            data_type: varchar
+            description: "ID del producto"
+            tests:
+              - not_null  
+
+          - name: quantity
+            data_type: date
+            description: "Cantidad de productos iguales pedidos"
+            tests:
+              - not_null
+      
+          - name: list_price
+            data_type: number
+            description: "Precio unitario según catálogo de ese producto"
+            tests:
+              - not_null  
+
+          - name: discount
+            data_type: number
+            description: "Descuento en porcentaje que se le aplica al producto"
+            tests:
+              - not_null   
+
+
+      - name: customer
+        description: "Tabla que almacena los clientes registrados"
+
+        columns:
+          - name: customer_id
+            data_type: varchar
+            description: "ID del cliente"
+            tests:
+              - unique
+              - not_null
+      
+          - name: first_name
+            description: "Nombre del cliente"
+            tests:
+              - not_null  
+
+          - name: last_name
+            description: "Apellido del cliente"
+            tests:
+              - not_null  
+
+          - name: phone
+            data_type: varchar
+            description: "Teléfono de contacto del cliente"
+      
+          - name: email
+            description: "Email de contacto del cliente"
+            tests:
+              - not_null  
+
+          - name: street
+            description: "Calle de la dirección donde vive el cliente"
+            tests:
+              - not_null   
+
+          - name: city
+            description: "Ciudad del cliente"
+            tests:
+              - not_null  
+
+          - name: state
+            description: "Estado de EEUU del cliente"
+            tests:
+              - not_null    
+
+          - name: zipcode
+            description: "Código postal de la dirección del cliente"
+
+
+
+
+      - name: staff
+        description: "Tabla que contiene a todos los empleados de la empresa"
+
+        columns:
+          - name: staff_id
+            data_type: varchar
+            description: "Id de cada empleado"
+            tests:
+              - unique
+              - not_null
+      
+          - name: first_name
+            description: "Nombre del empleado"
+            tests:
+              - not_null  
+
+          - name: last_name
+            description: "Apellido del empleado"
+            tests:
+              - not_null  
+
+          - name: phone
+            data_type: varchar
+            description: "Teléfono de contacto del empleado"
+      
+          - name: email
+            description: "Email corporativo del empleado" 
+
+          - name: active
+            data_type: varchar
+            description: "Situación actual del empleado registrado, si está activo en el trabajo o no (de baja, excedencia, etc)"
+
+          - name: store_id
+            description: "Id de la tienda donde trabaja el empleado"
+            tests:
+              - not_null  
+
+          - name: manager_id
+            description: "Id del manager del empleado"  
+
+
+
+
